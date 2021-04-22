@@ -72,6 +72,5 @@ public class Test_TCP3 {
         inputStream.close();
         accept.close();
         serverSocket.close();
-
     }
 }
