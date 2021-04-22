@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -21,7 +22,8 @@ public class Test_TCP2 {
         Socket socket = null;
         InputStream inputStream = null;
         try {
-            socket = new Socket("127.0.0.1",1234);
+            //            socket = new Socket("127.0.0.1", 1234);
+            socket = new Socket(InetAddress.getByName("127.0.0.1"), 1234);
             socket.getOutputStream().write(str.getBytes());
             socket.shutdownOutput();
             byte[] buff = new byte[1024];

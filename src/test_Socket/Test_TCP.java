@@ -5,8 +5,10 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 /**
  * 利用Socket套接字进行网络信息传输
@@ -19,7 +21,8 @@ public class Test_TCP {
        Socket socket = null;
        OutputStream outputStream = null;
        try {
-           socket = new Socket("127.0.0.1",1234);
+           //            socket = new Socket("127.0.0.1", 1234);
+           socket = new Socket(InetAddress.getByName("127.0.0.1"), 1234);
            outputStream = socket.getOutputStream();
            outputStream.write(data.getBytes());
        } catch (IOException e) {
