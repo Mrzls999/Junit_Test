@@ -1,3 +1,5 @@
+package test_Interface_Final;
+
 interface Test_Interface {
     String name = "hello";//public static final
     String getName();//abstract

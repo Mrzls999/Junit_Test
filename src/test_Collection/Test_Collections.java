@@ -1,3 +1,5 @@
+package test_Collection;
+
 import org.junit.Test;
 
 import java.util.ArrayList;

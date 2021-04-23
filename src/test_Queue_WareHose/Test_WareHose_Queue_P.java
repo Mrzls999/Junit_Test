@@ -1,3 +1,5 @@
+package test_Queue_WareHose;
+
 import org.junit.Test;
 
 public class Test_WareHose_Queue_P {
