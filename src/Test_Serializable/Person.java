@@ -43,7 +43,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "test_Annotation.Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age + '\'' +
                 ", nation=" + nation +

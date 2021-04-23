@@ -1,3 +1,5 @@
+package test_Singleton;
+
 /*
     一、单例设计模式：饿汉式
  */
@@ -24,10 +26,10 @@ class Singleton1 {
 	/**
 	 * 1. 这个有线程安全问题
 	 */
-//    private static Singleton1 singleton1 = null;
-//    public static Singleton1 getInstance(){
+//    private static test_Singleton.Singleton1 singleton1 = null;
+//    public static test_Singleton.Singleton1 getInstance(){
 //        if(singleton1 == null){
-//            singleton1 = new Singleton1();
+//            singleton1 = new test_Singleton.Singleton1();
 //        }
 //        return singleton1;
 //    }
@@ -35,12 +37,12 @@ class Singleton1 {
 	 * 2. 这个效率太低了，假设有100个线程要创建实例 
 	 * 那么，当前几个线程就已经创建了实例后，后边的就不需要去抢锁，然后，去判断实例是否存在，接着创建实例
 	 */
-//	private static Singleton1 singleton1 = null;
+//	private static test_Singleton.Singleton1 singleton1 = null;
 //
-//	public static Singleton1 getInstance() {
-//		synchronized (Singleton1.class) {
+//	public static test_Singleton.Singleton1 getInstance() {
+//		synchronized (test_Singleton.Singleton1.class) {
 //			if (singleton1 == null) {
-//				singleton1 = new Singleton1();
+//				singleton1 = new test_Singleton.Singleton1();
 //			}
 //		}
 //		return singleton1;
@@ -65,8 +67,8 @@ class Singleton1 {
 class TestSingleton {
 	public static void main(String[] args) {
 		/*
-		 * 测试饿汉式 Singleton singleton = Singleton.getInstance(); Singleton singleton1 =
-		 * Singleton.getInstance(); System.out.println(singleton.equals(singleton1));
+		 * 测试饿汉式 test_Singleton.Singleton singleton = test_Singleton.Singleton.getInstance(); test_Singleton.Singleton singleton1 =
+		 * test_Singleton.Singleton.getInstance(); System.out.println(singleton.equals(singleton1));
 		 */
 		// 测试懒汉式
 		Singleton1 singleton = Singleton1.getInstance();

@@ -1,3 +1,5 @@
+package test_String_StringBuffer;
+
 import org.junit.Test;
 
 public class Test_String {

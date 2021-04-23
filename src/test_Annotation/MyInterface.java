@@ -1,3 +1,5 @@
+package test_Annotation;
+
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
 
@@ -8,7 +10,7 @@ public @interface MyInterface {
     int age();
 }
 
-@MyInterface(name = "zls",age = 18)//@MyInterface(age = 18)
+@MyInterface(name = "zls",age = 18)//@test_Annotation.MyInterface(age = 18)
 class Test_MyInterface{
 
     @MyInterface(age=20)
