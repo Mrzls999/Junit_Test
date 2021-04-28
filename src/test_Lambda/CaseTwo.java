@@ -33,8 +33,6 @@ package test_Lambda;
 
 import org.junit.Test;
 
-import java.util.Locale;
-
 /**
  * 2 ① 声明函数式接口，接口中声明抽象方法，public String getValue(String str);
  * ② 声明类 CaseTwo ，类中编写方法使用接口作为参数
