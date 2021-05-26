@@ -1,2 +1,2 @@
 # Junit_Test
-Study JavaSE
+Study Java
