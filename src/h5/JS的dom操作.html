@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <script>
+        function fblur() {
+            document.getElementById("spanId").innerHTML="<font color='red'>失去焦点</font>";
+        }
+        function ffocus() {
+            document.getElementById("spanId").innerHTML="<font color=green>获得焦点</font>";
+        }
+    </script>
+<body>
+username:<input onblur="fblur();" onfocus="ffocus()" type="text" name="username" /><span id="spanId"></span>
+</body>
+</html>
