@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!--节点的自动添加以及删除-->
+  <input type="button" value="添加" onclick="addOne()" />
+  <div id="dID" style="width: 500px;height: 600px;border: green solid 1px"></div>
+</body>
+  <script>
+    /**
+     * 添加一个节点
+     */
+    function addOne(){
+        let elementById = document.getElementById("dID");
+        let divInnerHtml = elementById.innerHTML;
+        //添加节点时，一般都用一个父标签包含起来
+        divInnerHtml+=("<div>"+"name<input type='text' />"+"<input type='button' value='删除' onclick='delThis(this)'/>"+"</div>");
+        elementById.innerHTML=divInnerHtml;
+    }
+
+    /**
+     * 删除当前节点
+     */
+    function delThis(thisInput){
+        let parentNode = thisInput.parentNode;//获取input的父节点 div
+        let grandpaNode = parentNode.parentNode;//获取 div 的父节点(因为要删除一行，所以要删除整行div)
+        grandpaNode.removeChild(parentNode);
+    }
+  </script>
+</html>

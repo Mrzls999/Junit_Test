@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!--当用户点击【验证】按钮之后。验证用户名输入框中的内容是否合法。验证规则是，用户名只能从数字、字母、下划线中选择，并且长度是5-12位。页面定义如下：-->
+  用户名：<label for="xx"><input id="xx" type="text" name="username" value="12345"/></label>
+  <button id="btn1" onclick="verifyName1()">验证</button>
+</body>
+  <script>
+    function verifyName(){
+      var flag = true;
+      var nodeV = document.getElementById("xx").value;
+      var nodeLength = nodeV.length;
+      if(nodeLength<5 || nodeLength>12){
+        alert("用户名长度为：5-12位");
+        flag = false;
+      }else {
+        for (let i = 0; i < nodeLength; i++) {
+          var nodeCode = nodeV.charCodeAt(i);//获取第 i 个字符的 ascii码值
+          if(nodeCode!==95){//如果不是下划线,就判断是不是字母
+            if(nodeCode<65 || nodeCode > 90){//如果不是小写字母，就判断是不是大写字母
+              if(nodeCode<97 || nodeCode>122){//如果不是大写字母，就判断是不是数字
+                if(nodeCode<48 || nodeCode>57){//如果不是数字，那么就说明不符合规则
+                  alert("用户名只能从数字、字母、下划线中选择");
+                  flag = false;
+                }
+              }
+            }
+          }
+        }
+      }
+      return flag;
+    }
+    function verifyName1() {
+      let flag = verifyName();
+      console.log(flag);
+    }
+  </script>
+</html>

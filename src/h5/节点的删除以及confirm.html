@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--删除最后一个节点-->
+    <ul id="uid"><li id="lid1">z1</li><li id="lid2">z2</li><li id="lid3">z3</li></ul>
+    <input type="button" value="删除最后一个节点" onclick="delLast()" />
+    <!--confirm测试-->
+    <input type="button" value="删除" onclick="del1()">
+</body>
+    <script>
+        /**
+         * 删除最后一个节点
+         */
+        function delLast(){
+            let ulElement = document.getElementById("uid");
+            let childNodes = ulElement.childNodes;
+            const length = childNodes.length;
+            if(length > 0){
+                ulElement.removeChild(childNodes[length-1]);
+            }
+        }
+
+        /**
+         * 删除第一个节点及confirm测试
+         */
+        function del1(){
+            let ulElement = document.getElementById("uid");
+            let childNodes = ulElement.childNodes;
+            const length = childNodes.length;
+            const flag = window.confirm(`是否删除第一条数据`);//点击确定返回true，点击取消返回false
+            if(length > 0 && flag){
+                ulElement.removeChild(childNodes[0]);
+            }
+        }
+    </script>
+</html>
