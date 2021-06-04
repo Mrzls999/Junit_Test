@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <style>
+        .buttons{
+            width: 800px;
+            height: 20px;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <!--用jQuery写个一个按钮，然后隔行变色，第一行不变(比如原来是黑色，那么现在还是黑色，且第一行的颜色不确定)-->
+    <div id="dId" style="width: 800px;height: 600px;border: solid green 1px">
+
+    </div>
+    <button type="button" style="width: 100px;height: 100px" onclick="addLine()">添加行</button>
+    <button type="button" style="width: 100px;height: 100px" onclick="changeColor()">变色</button>
+
+</body>
+    <script>
+        /**
+         * 向div中添加6行
+         * @type {number}
+         */
+        let line = 0;
+        function addLine() {
+            while(line<6) {
+                $("#dId")[0].innerHTML+="<button class='buttons'></button>";
+                line+=1;
+            }
+        }
+
+        /**
+         * 改变每一行的颜色，第一行不动，之后的隔行换色
+         */
+        function changeColor() {
+            let buttons = $(".buttons");
+            let button_length = buttons.length;//得到一共有多少行
+            for (let i = 0; i < button_length; i++) {
+                if(i===0){//第一行不变色
+
+                }else if(i%2!==0){//如果是奇数，则变成绿色
+                    $(".buttons:eq("+i+")").css("background-color","green");
+                }else{//如果是偶数则变成红色
+                    document.getElementsByClassName("buttons")[i].style.background="red";
+                }
+            }
+        }
+    </script>
+</html>
