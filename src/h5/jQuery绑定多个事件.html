@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<label for="username">昵称
+    <input type="text" id="username"/>
+</label>
+</body>
+<script>
+    $(function(){
+        $("#username").bind({
+                // focusin:function (){$("input").css("style","background:red")},
+                // focusout:function(){$("input").css("style","background:black")}
+            focusin:function (){$("input").css({background:"green"});
+                                $("label").css({color:""})},
+            focusout:function(){$("input").css({background:"red"});
+                                $("label").css({color:"red"})}
+        });
+    })
+</script>
+</html>

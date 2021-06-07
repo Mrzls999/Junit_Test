@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="jquery-1.7.2.min.js">
+  </script>
+</head>
+<body>
+<label>
+  <select id="provincesId">
+    <option value="0">--请选择省份--</option>
+    <option value="1">山东</option>
+    <option value="2">浙江</option>
+    <option value="3">新疆</option>
+  </select>
+</label>
+<label>
+  <select id="citiesId">
+
+  </select>
+</label>
+</body>
+<script>
+  let cityArray = new Array(4);
+  cityArray[0] = ["--省份--","--下辖市--"];
+  cityArray[1] = ["日照","临沂","青岛"];
+  cityArray[2] = ["杭州","宁波","嘉兴"];
+  cityArray[3] = ["乌鲁木齐","哈密"];
+  $(function(){
+    $("#provincesId").change(function(){
+      let index = $(this).val();//得到你选的是第几个
+      let cityArrayElement = cityArray[index];
+      $("#citiesId").html("<option>---请选择-</option>");//相当于清空原来列表，再添加的这一行
+      for (let i = 0; i < cityArrayElement.length; i++) {
+        $("#citiesId").append("<option>"+cityArrayElement[i]+"</option>");
+      }
+    })
+  })
+</script>
+</html>
