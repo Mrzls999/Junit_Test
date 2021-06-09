@@ -6,6 +6,9 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+/**
+ * 获得xml标签属性值
+ */
 public class Dom4j_case03_Get_label_attribute {
     public static void main(String[] args) throws DocumentException {
         SAXReader saxReader = new SAXReader();
