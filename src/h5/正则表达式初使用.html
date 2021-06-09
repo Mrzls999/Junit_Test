@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<label>
+  <input type="text" name="username"/>
+</label>
+  <button type="button" name="verify_Button">验证</button>
+</body>
+<script>
+  $(function(){
+    let verifyBut = document.getElementsByName("verify_Button")[0];
+    let jQ_verifyBut = $(verifyBut);//将JS格式转换为jQuery格式，类似的还有 $(this)
+    jQ_verifyBut.click(function (){
+      //正则表达式
+      const regular_exp = /^[a-z]{3,6}$/;
+      let nameV = $("input[name='username']").val();
+      console.log(nameV);
+      if(regular_exp.test(nameV)){
+        console.log("yes");
+      }else{
+        console.log("no");
+      }
+    });
+  });
+</script>
+</html>
