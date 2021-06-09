@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<users>
+    <user1 id="user1_Id">
+        <name>张良升</name>
+        <age>18</age>
+    </user1>
+    <user2>
+
+    </user2>
+</users>
