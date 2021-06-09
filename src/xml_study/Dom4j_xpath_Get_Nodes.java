@@ -8,7 +8,7 @@ import org.dom4j.io.SAXReader;
 import java.util.List;
 
 /**
- * 得到所有有name属性的属性值
+ * 得到所有有name属性的内容
  */
 public class Dom4j_xpath_Get_Nodes {
     public static void main(String[] args) throws DocumentException {

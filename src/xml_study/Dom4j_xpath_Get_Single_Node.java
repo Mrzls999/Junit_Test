@@ -5,6 +5,9 @@ import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
+/**
+ * 获得有name属性且 id值为user1_name_Id的内容
+ */
 public class Dom4j_xpath_Get_Single_Node {
     public static void main(String[] args) throws DocumentException {
         SAXReader saxReader = new SAXReader();
