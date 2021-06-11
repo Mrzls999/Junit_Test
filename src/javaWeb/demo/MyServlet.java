@@ -1,4 +1,4 @@
-package javaWeb.Demo;
+package javaWeb.demo;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
