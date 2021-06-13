@@ -3,9 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <welcome-file-list>
+    <!--默认开始位置-->
+<!--    <welcome-file-list>
         <welcome-file>/shop/pages/user/login.html</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
     <!--刚开始测试的-->
     <servlet>
         <servlet-name>MyServlet</servlet-name>
@@ -72,6 +73,14 @@
         <servlet-name>Servlet_BeanUtils</servlet-name>
         <url-pattern>/servlet_BeanUtils</url-pattern>
     </servlet-mapping>
-
+    <!--shop项目的登录servlet-->
+    <servlet>
+        <servlet-name>Shop_LoginServlet</servlet-name>
+        <servlet-class>javaWeb.shop.web.Shop_LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shop_LoginServlet</servlet-name>
+        <url-pattern>/shopLogin</url-pattern>
+    </servlet-mapping>
 
 </web-app>

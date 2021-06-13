@@ -45,8 +45,7 @@ public class BaseDBUtils {
         Connection connection = JdbcUtils.getConnection();
         T t = null;
         try {
-            t = queryRunner.query(connection, sql, new BeanHandler<T>(type),
-                    params);
+            t = queryRunner.query(connection, sql, new BeanHandler<T>(type),params);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
