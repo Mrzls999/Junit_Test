@@ -11,7 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  <h1>hello world 你好世界</h1>
+  <h1>hello world</h1>
   $END$
+  <img src="shop/static/img/code.bmp">
   </body>
 </html>
