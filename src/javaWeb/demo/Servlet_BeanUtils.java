@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
 public class Servlet_BeanUtils extends HttpServlet {
     @Override

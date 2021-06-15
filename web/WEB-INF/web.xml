@@ -82,5 +82,14 @@
         <servlet-name>Shop_LoginServlet</servlet-name>
         <url-pattern>/shopLogin</url-pattern>
     </servlet-mapping>
+    <!--shop项目的注册Servlet-->
+    <servlet>
+        <servlet-name>Shop_RegisterServlet</servlet-name>
+        <servlet-class>javaWeb.shop.web.Shop_RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shop_RegisterServlet</servlet-name>
+        <url-pattern>/shopRegister</url-pattern>
+    </servlet-mapping>
 
 </web-app>

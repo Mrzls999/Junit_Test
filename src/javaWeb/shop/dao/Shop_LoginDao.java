@@ -3,7 +3,7 @@ package javaWeb.shop.dao;
 import javaWeb.shop.entity.UserLogin;
 import javaWeb.shop.utils.BaseDBUtils;
 
-public class Shop_LoginDao {
+public class Shop_LoginDao{
 
     /**
      * 根据用户名密码，查询出一个用户，用来登录
