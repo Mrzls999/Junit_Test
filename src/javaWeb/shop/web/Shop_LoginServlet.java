@@ -1,7 +1,8 @@
 package javaWeb.shop.web;
 
 import javaWeb.shop.entity.UserLogin;
-import javaWeb.shop.service.Shop_LoginService;
+import javaWeb.shop.service.UserService;
+import javaWeb.shop.service.impl.UserServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,7 +24,7 @@ public class Shop_LoginServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Shop_LoginService shop_loginService = new Shop_LoginService();
+        UserService shop_loginService = new UserServiceImpl();
         String sql = "select * from user_login where username = '" + username + "' and password = md5(" + password+");";
         boolean flag = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
         System.out.println(flag);
