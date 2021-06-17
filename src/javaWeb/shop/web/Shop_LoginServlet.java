@@ -27,7 +27,10 @@ public class Shop_LoginServlet extends HttpServlet {
         UserService shop_loginService = new UserServiceImpl();
         String sql = "select * from user_login where username = '" + username + "' and password = md5(" + password+");";
         boolean flag = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
-        System.out.println(flag);
-
+        if(flag){//如果查到了，则
+            response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.html");
+        }else {
+            response.sendRedirect(request.getContextPath()+"/shop/pages/user/login.html");
+        }
     }
 }
