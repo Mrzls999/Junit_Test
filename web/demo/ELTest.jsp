@@ -21,5 +21,6 @@
     %>
     ${user.username}
     ${user.password}
+    ${pageContext.request.contextPath}
 </body>
 </html>

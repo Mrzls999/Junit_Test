@@ -30,7 +30,8 @@ public class Shop_LoginServlet extends HttpServlet {
         if(flag){//如果查到了，则
             response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.html");
         }else {
-            response.sendRedirect(request.getContextPath()+"/shop/pages/user/login.html");
+            request.setAttribute("msg","用户名或密码错误");
+            request.getRequestDispatcher("/shop/pages/user/login.jsp").forward(request,response);
         }
     }
 }
