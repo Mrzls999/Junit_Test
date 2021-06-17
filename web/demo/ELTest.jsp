@@ -1,5 +1,5 @@
 <%@ page import="javaWeb.entity.User" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: zls
@@ -22,5 +22,18 @@
     ${user.username}
     ${user.password}
     ${pageContext.request.contextPath}
+
+    <%
+        request.setAttribute("user","zs");
+        if(request.getAttribute("user")=="zs"){
+            response.getWriter().write("user==zs");
+        }else {
+            response.getWriter().write("user!=zs");
+        }
+    %>
+
+    <c:if test="${user=='zs'}">
+        <span style="color: red">${user}</span>
+    </c:if>
 </body>
 </html>
