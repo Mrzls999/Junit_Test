@@ -18,6 +18,11 @@ public class Base_UserServlet extends HttpServlet {
      */
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //post提交方式设置支持中文
+        req.setCharacterEncoding("utf-8");//设置请求体编码
+        resp.setHeader("Content-Type","text/html;charset=utf-8");//设置浏览器编码
+        resp.setCharacterEncoding("utf-8");//设置response的编码
+
         String methodName = req.getParameter("meth");//得到从url串中填写好的方法名字
         Class<? extends Base_UserServlet> aClass = this.getClass();//得到运行类
         try {
