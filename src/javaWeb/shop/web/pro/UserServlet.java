@@ -9,10 +9,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/user")
-public class UserServlet extends Base_UserServlet {
+public class UserServlet extends BaseServlet {
 
     /**
      * 用户登录

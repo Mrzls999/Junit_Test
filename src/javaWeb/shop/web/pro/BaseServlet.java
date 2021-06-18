@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class Base_UserServlet extends HttpServlet {
+public class BaseServlet extends HttpServlet {
     /**
      * 每次创建对象都会调用service方法
      * @param req
@@ -24,7 +24,7 @@ public class Base_UserServlet extends HttpServlet {
         resp.setCharacterEncoding("utf-8");//设置response的编码
 
         String methodName = req.getParameter("meth");//得到从url串中填写好的方法名字
-        Class<? extends Base_UserServlet> aClass = this.getClass();//得到运行类
+        Class<? extends BaseServlet> aClass = this.getClass();//得到运行类
         try {
             Method method = aClass.getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);//根据方法名字得到方法
             method.invoke(aClass.newInstance(),req,resp);

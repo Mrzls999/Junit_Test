@@ -1,0 +1,13 @@
+package javaWeb.shop.dao;
+
+import javaWeb.shop.entity.Book;
+
+import java.util.List;
+
+public interface BookDao {
+    /**
+     * 获得所有图书信息
+     * @return
+     */
+    public List<Book> getAllBooks();
+}
