@@ -59,7 +59,7 @@
                     <span style="color:red;">${requestScope.msg}</span>
                 </div>
                 <div class="form">
-                    <form action="${pageContext.request.contextPath}/shopLogin" method="post">
+                    <form action="${pageContext.request.contextPath}/user?meth=login" method="post"><!---将shopLogin改为user-->
                         <label>用户名称：</label>
                         <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1"
                                name="username" id="username"/>
