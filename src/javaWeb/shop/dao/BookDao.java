@@ -10,4 +10,11 @@ public interface BookDao {
      * @return
      */
     public List<Book> getAllBooks();
+
+    /**
+     * 添加一行图书信息
+     * @param sql
+     * @return
+     */
+    public int addBook(String sql);
 }

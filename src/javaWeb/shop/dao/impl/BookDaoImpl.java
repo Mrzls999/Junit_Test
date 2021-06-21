@@ -16,4 +16,14 @@ public class BookDaoImpl implements BookDao {
         BaseDBUtils baseDBUtils = new BaseDBUtils();
         return baseDBUtils.getBeanList("SELECT * FROM books", Book.class);
     }
+
+    /**
+     * 添加一行图书信息
+     * @return
+     */
+    @Override
+    public int addBook(String sql) {
+        BaseDBUtils baseDBUtils = new BaseDBUtils();
+        return baseDBUtils.update(sql);
+    }
 }

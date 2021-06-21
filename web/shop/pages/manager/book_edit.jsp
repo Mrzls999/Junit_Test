@@ -29,10 +29,10 @@
 </head>
 <body>
 <div id="header">
-    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/tatic/img/logo.gif" >
+<%--    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
     <span class="wel_word">编辑图书</span>
     <div>
-        <a href="book_manager.jsp">图书管理</a>
+        <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>
         <a href="order_manager.html">订单管理</a>
         <a href="../../index.html">返回商城</a>
     </div>

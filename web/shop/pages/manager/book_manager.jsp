@@ -17,7 +17,7 @@
 <body>
 
 <div id="header">
-    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >
+<%--    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
     <span class="wel_word">图书管理系统</span>
     <div>
         <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>
@@ -61,7 +61,7 @@
 
 <div id="bottom">
 		<span>
-			尚硅谷书城.Copyright &copy;2015
+			书城.Copyright &copy;2021
 		</span>
 </div>
 </body>

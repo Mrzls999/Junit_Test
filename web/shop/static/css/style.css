@@ -340,7 +340,7 @@ h1 {
     border: 1px #e3e3e3 solid;
     padding: 10px;
 }
-#main.box_order table tr:first{
+#main.box_order table tr:first-child td{
 	font-weight: bolder;
 }
 #main.box_order table td > a{
@@ -348,4 +348,12 @@ h1 {
 }
 #main.box_order table td .a_green{
 	color: #07c160;
+}
+
+/*添加图书页面 book_add.jsp*/
+#main form tr td input{
+	width: 120px;
+}
+#main form tr td:last-child input{
+	width: 100px;
 }

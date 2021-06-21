@@ -16,4 +16,14 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooks() {
         return new BookDaoImpl().getAllBooks();
     }
+
+    /**
+     * 添加一行图书信息
+     * @param sql
+     * @return
+     */
+    @Override
+    public boolean addBook(String sql) {
+        return new BookDaoImpl().addBook(sql) > 0;
+    }
 }
