@@ -17,4 +17,11 @@ public interface BookDao {
      * @return
      */
     public int addBook(String sql);
+
+    /**
+     * 删除一本书
+     * @param sql
+     * @return
+     */
+    public int delBookFromID(String sql);
 }

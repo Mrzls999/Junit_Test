@@ -52,4 +52,24 @@ public class BookServlet extends BaseServlet {
             request.getRequestDispatcher("/shop/pages/manager/book_add.jsp").forward(request, response);
         }
     }
+
+    /**
+     * 删除一本书，通过ID
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void delBookFromID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String bookId = request.getParameter("id");
+        boolean delBookSuccess_Flag = new BookServiceImpl().delBookFromID("DELETE FROM books WHERE ID=" + bookId);
+        if (delBookSuccess_Flag) {
+            request.setAttribute("delBookSuccess_Flag",true);
+        }else {
+            request.setAttribute("delBookSuccess_Flag",false);
+        }
+        request.getRequestDispatcher("/book?meth=getAllBooks").forward(request,response);
+    }
+
+
 }

@@ -26,4 +26,14 @@ public class BookServiceImpl implements BookService {
     public boolean addBook(String sql) {
         return new BookDaoImpl().addBook(sql) > 0;
     }
+
+    /**
+     * 删除一本书
+     * @param sql
+     * @return
+     */
+    @Override
+    public boolean delBookFromID(String sql) {
+        return new BookDaoImpl().delBookFromID(sql) == 1;
+    }
 }

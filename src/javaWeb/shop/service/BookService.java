@@ -17,4 +17,11 @@ public interface BookService {
      * @return
      */
     public boolean addBook(String sql);
+
+    /**
+     * 删除一本书
+     * @param sql
+     * @return
+     */
+    public boolean delBookFromID(String sql);
 }

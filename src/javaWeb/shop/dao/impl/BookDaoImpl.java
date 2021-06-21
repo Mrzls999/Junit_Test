@@ -13,8 +13,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public List<Book> getAllBooks() {
-        BaseDBUtils baseDBUtils = new BaseDBUtils();
-        return baseDBUtils.getBeanList("SELECT * FROM books", Book.class);
+        return new BaseDBUtils().getBeanList("SELECT * FROM books", Book.class);
     }
 
     /**
@@ -23,7 +22,16 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public int addBook(String sql) {
-        BaseDBUtils baseDBUtils = new BaseDBUtils();
-        return baseDBUtils.update(sql);
+        return new BaseDBUtils().update(sql);
+    }
+
+    /**
+     * 删除一本书
+     * @param sql
+     * @return
+     */
+    @Override
+    public int delBookFromID(String sql) {
+        return new BaseDBUtils().update(sql);
     }
 }

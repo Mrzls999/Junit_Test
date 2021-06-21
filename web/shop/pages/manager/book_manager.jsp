@@ -44,9 +44,17 @@
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
                 <td><a href="<%=request.getContextPath()%>/shop/pages/manager/book_edit.jsp" class="a_green">修改</a></td>
-                <td><a href="#">删除</a></td>
+<%--                <td><input type="button" onclick="delOneBook(${book.id})">删除</td>--%>
+                <td><a onclick="delOneBook(${book.id})">删除</a></td>
             </tr>
         </c:forEach>
+        <%--看是否删除成功--%>
+        <c:if test="${requestScope.delBookSuccess_Flag==true}">
+            <script type='text/javascript'>alert('删除成功');</script>
+        </c:if>
+        <c:if test="${requestScope.delBookSuccess_Flag==false}">
+           <script type='text/javascript'>alert('删除失败');</script>
+        </c:if>
         <tr>
             <td></td>
             <td></td>
@@ -65,4 +73,13 @@
 		</span>
 </div>
 </body>
+<script>
+    function delOneBook(bookID){
+        const delFlag = window.confirm('是否删除这本书籍');//点击确定返回true，点击取消返回false
+        console.log(delFlag);
+        if(delFlag){
+            window.location.href = "http://127.0.0.1:8080/${pageContext.request.contextPath}/book?meth=delBookFromID&id="+bookID;
+        }
+    }
+</script>
 </html>
