@@ -36,17 +36,26 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-        <c:forEach items="${requestScope.allBooks}" var="book">
+        <c:forEach items="${requestScope.allBooks}" var="book" >
             <tr>
                 <td>${book.title}</td>
                 <td>${book.price}</td>
                 <td>${book.author}</td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="book_edit.jsp" class="a_green">修改</a></td>
+                <td><a href="<%=request.getContextPath()%>/shop/pages/manager/book_edit.jsp" class="a_green">修改</a></td>
                 <td><a href="#">删除</a></td>
             </tr>
         </c:forEach>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="<%=request.getContextPath()%>/shop/pages/manager/book_add.jsp">添加图书</a></td>
+        </tr>
     </table>
 </div>
 
