@@ -31,4 +31,11 @@ public interface BookService {
      * @return
      */
     public Book displayDataById(String sql);
+
+    /**
+     * 根据id进行book的数据修改
+     * @param sql
+     * @return 是否修改成功
+     */
+    public boolean updateBookById(String sql);
 }

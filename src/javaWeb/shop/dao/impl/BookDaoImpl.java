@@ -44,4 +44,14 @@ public class BookDaoImpl implements BookDao {
     public Book displayDataById(String sql) {
         return new BaseDBUtils().getBean(sql,Book.class);
     }
+
+    /**
+     * 根据id进行book的数据修改
+     * @param sql
+     * @return 受影响的行数
+     */
+    @Override
+    public int updateBookById(String sql) {
+        return new BaseDBUtils().update(sql);
+    }
 }

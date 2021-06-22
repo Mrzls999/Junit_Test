@@ -31,4 +31,11 @@ public interface BookDao {
      * @return
      */
     public Book displayDataById(String sql);
+
+    /**
+     * 根据id进行book的数据修改
+     * @param sql
+     * @return
+     */
+    public int updateBookById(String sql);
 }

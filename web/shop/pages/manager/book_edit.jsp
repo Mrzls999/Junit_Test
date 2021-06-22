@@ -41,7 +41,8 @@
 </div>
 
 <div id="main">
-    <form action="book_manager.html">
+    <form action="${pageContext.request.contextPath}/book?meth=updateBookById" method="post">
+        <input type="hidden" name="id" value="${requestScope.bookById.id}">
         <table>
             <tr>
                 <td>名称</td>

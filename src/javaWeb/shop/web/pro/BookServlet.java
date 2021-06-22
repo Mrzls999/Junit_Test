@@ -85,6 +85,29 @@ public class BookServlet extends BaseServlet {
         request.getRequestDispatcher("/shop/pages/manager/book_edit.jsp").forward(request,response);
     }
 
+    /**
+     * 根据Book的id修改数据
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void updateBookById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Book book = new Book();
+        try {
+            BeanUtils.populate(book,request.getParameterMap());
+        } catch (IllegalAccessException |InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        String sql = "UPDATE books SET title='"+book.getTitle()+"',author='"+book.getAuthor()+"',price="+book.getPrice()+",stock="+book.getStock()+",sales="+book.getSales()+" WHERE id="+book.getId();
+        boolean updateFlag = new BookServiceImpl().updateBookById(sql);
+//        if (updateFlag) {
+//            request.setAttribute("updateFlag",true);
+//        }else {
+//            request.setAttribute("updateFlag",false);
+//        }
+        request.getRequestDispatcher("/book?meth=getAllBooks").forward(request,response);
+    }
 
 
 }

@@ -47,4 +47,14 @@ public class BookServiceImpl implements BookService {
     public Book displayDataById(String sql) {
         return new BookDaoImpl().displayDataById(sql);
     }
+
+    /**
+     * 根据id进行book的数据修改
+     * @param sql
+     * @return 是否修改了一行
+     */
+    @Override
+    public boolean updateBookById(String sql) {
+        return new BookDaoImpl().updateBookById(sql)==1;
+    }
 }
