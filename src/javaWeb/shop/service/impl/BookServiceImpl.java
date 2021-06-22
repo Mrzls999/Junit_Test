@@ -3,6 +3,7 @@ package javaWeb.shop.service.impl;
 import javaWeb.shop.dao.impl.BookDaoImpl;
 import javaWeb.shop.entity.Book;
 import javaWeb.shop.service.BookService;
+import javaWeb.shop.utils.BaseDBUtils;
 
 import java.util.List;
 
@@ -35,5 +36,15 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean delBookFromID(String sql) {
         return new BookDaoImpl().delBookFromID(sql) == 1;
+    }
+
+    /**
+     * 根据id修改时的数据回显
+     * @param sql
+     * @return
+     */
+    @Override
+    public Book displayDataById(String sql) {
+        return new BookDaoImpl().displayDataById(sql);
     }
 }

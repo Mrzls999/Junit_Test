@@ -34,4 +34,14 @@ public class BookDaoImpl implements BookDao {
     public int delBookFromID(String sql) {
         return new BaseDBUtils().update(sql);
     }
+
+    /**
+     * 根据id修改时的数据回显
+     * @param sql
+     * @return
+     */
+    @Override
+    public Book displayDataById(String sql) {
+        return new BaseDBUtils().getBean(sql,Book.class);
+    }
 }

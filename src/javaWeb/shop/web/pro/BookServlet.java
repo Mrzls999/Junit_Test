@@ -16,8 +16,7 @@ import java.util.List;
 public class BookServlet extends BaseServlet {
 
     /**
-     * 书籍curd
-     *
+     * 所有书籍信息显示
      * @param request
      * @param response
      * @throws ServletException
@@ -70,6 +69,22 @@ public class BookServlet extends BaseServlet {
         }
         request.getRequestDispatcher("/book?meth=getAllBooks").forward(request,response);
     }
+
+    /**
+     * 根据id修改时的数据回显
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void displayDataById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("Id");
+        String sql = "SELECT * FROM books WHERE id="+id;
+        Book book = new BookServiceImpl().displayDataById(sql);
+        request.setAttribute("bookById",book);
+        request.getRequestDispatcher("/shop/pages/manager/book_edit.jsp").forward(request,response);
+    }
+
 
 
 }

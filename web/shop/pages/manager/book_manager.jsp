@@ -43,8 +43,7 @@
                 <td>${book.author}</td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="<%=request.getContextPath()%>/shop/pages/manager/book_edit.jsp" class="a_green">修改</a></td>
-<%--                <td><input type="button" onclick="delOneBook(${book.id})">删除</td>--%>
+                <td><a href="${pageContext.request.contextPath}/book?meth=displayDataById&Id=${book.id}" class="a_green">修改</a></td>
                 <td><a onclick="delOneBook(${book.id})">删除</a></td>
             </tr>
         </c:forEach>

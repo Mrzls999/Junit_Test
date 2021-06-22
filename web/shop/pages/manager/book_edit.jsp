@@ -1,3 +1,5 @@
+<%@ page import="org.apache.commons.beanutils.BeanUtils" %>
+<%@ page import="javaWeb.shop.entity.Book" %>
 <%--
   Created by IntelliJ IDEA.
   User: zls
@@ -34,7 +36,7 @@
     <div>
         <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>
         <a href="order_manager.html">订单管理</a>
-        <a href="../../index.html">返回商城</a>
+        <a href="${pageContext.request.contextPath}/shop/index.jsp">返回商城</a>
     </div>
 </div>
 
@@ -50,11 +52,11 @@
                 <td colspan="2">操作</td>
             </tr>
             <tr>
-                <td><input name="book_name" type="text" value="时间简史"/></td>
-                <td><input name="book_price" type="text" value="30.00"/></td>
-                <td><input name="book_author" type="text" value="霍金"/></td>
-                <td><input name="book_sales" type="text" value="200"/></td>
-                <td><input name="book_stock" type="text" value="300"/></td>
+                <td><input name="title" type="text" value="${requestScope.bookById.title}"/></td>
+                <td><input name="price" type="text" value="${requestScope.bookById.price}"/></td>
+                <td><input name="author" type="text" value="${requestScope.bookById.author}"/></td>
+                <td><input name="sales" type="text" value="${requestScope.bookById.sales}"/></td>
+                <td><input name="stock" type="text" value="${requestScope.bookById.stock}"/></td>
                 <td><input type="submit" value="提交"/></td>
             </tr>
         </table>
@@ -65,7 +67,7 @@
 
 <div id="bottom">
 			<span>
-				尚硅谷书城.Copyright &copy;2015
+				书城.Copyright &copy;2021
 			</span>
 </div>
 </body>
