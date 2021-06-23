@@ -74,8 +74,37 @@ public class BookServiceImpl implements BookService {
         PageBean<Book> bookPageBean = new PageBean<>();
         //1.当前页
         bookPageBean.setPageNo(pageNo);
-        //2.每页显示记录数，固定为4
-        int pageSize = 4;
+        //2.每页显示记录数，固定为3
+        int pageSize = 3;
+        bookPageBean.setPageSize(pageSize);
+        //3.总记录数
+        //从数据库中获取总记录数
+        int totalRecordCount = new BookDaoImpl().getTotalRecordCount();
+        bookPageBean.setTotalRecord(totalRecordCount);
+        //4.总页数
+        bookPageBean.setTotalPageNo((int)Math.ceil((double) totalRecordCount / pageSize));
+        //5.开始位置
+        int begin = (pageNo - 1) * pageSize;
+        bookPageBean.setBegin(begin);
+        //6.每页数据集合
+        List<Book> bookList = new BookDaoImpl().getPageList(begin, pageSize);
+        bookPageBean.setList(bookList);
+
+        return bookPageBean;
+    }
+
+    /**
+     * 根据查询条件，分页展示图书信息
+     * @return
+     */
+    @Override
+    public PageBean<Book> showPaginationFromCondition(int pageNo, String bookTitle) {
+        //进行pageBean的封装
+        PageBean<Book> bookPageBean = new PageBean<>();
+        //1.当前页
+        bookPageBean.setPageNo(pageNo);
+        //2.每页显示记录数，固定为3
+        int pageSize = 3;
         bookPageBean.setPageSize(pageSize);
         //3.总记录数
         //从数据库中获取总记录数

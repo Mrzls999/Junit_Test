@@ -123,4 +123,20 @@ public class BookServlet extends BaseServlet {
         request.setAttribute("bookPageBean",bookPageBean);
         request.getRequestDispatcher("/shop/pages/manager/book_manager.jsp").forward(request,response);
     }
+
+    /**
+     * 通过条件查询，分页展示图书信息
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void showPaginationFromCondition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pageNo = request.getParameter("pageNo");//得到你想显示的那一页
+        String bookTitle = request.getParameter("title");
+        PageBean<Book> bookPageBeanFromCondition = new BookServiceImpl().showPaginationFromCondition(Integer.parseInt(pageNo),bookTitle);
+        request.setAttribute("bookPageBeanFromCondition",bookPageBeanFromCondition);
+        request.setAttribute("bookTile",bookTitle);
+        request.getRequestDispatcher("/shop/pages/manager/book_manager.jsp").forward(request,response);
+    }
 }

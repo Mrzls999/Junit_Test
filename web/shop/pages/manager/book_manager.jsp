@@ -28,6 +28,10 @@
 </div>
 
 <div id="main" class="box_no">
+    <div class="book_cond">
+        图书名称：<input type="text" style="width: 100px" name="bookName">
+        <button onclick="showPaginationFromCondition(1)">查询</button>
+    </div>
     <table>
         <tr>
             <td>名称</td>
@@ -37,17 +41,6 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-<%--        <c:forEach items="${requestScope.allBooks}" var="book" >--%>
-<%--            <tr>--%>
-<%--                <td>${book.title}</td>--%>
-<%--                <td>${book.price}</td>--%>
-<%--                <td>${book.author}</td>--%>
-<%--                <td>${book.sales}</td>--%>
-<%--                <td>${book.stock}</td>--%>
-<%--                <td><a href="${pageContext.request.contextPath}/book?meth=displayDataById&Id=${book.id}" class="a_green">修改</a></td>--%>
-<%--                <td><a onclick="delOneBook(${book.id})">删除</a></td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
         <c:forEach items="${requestScope.bookPageBean.list}" var="book" >
             <tr>
                 <td>${book.title}</td>
@@ -101,7 +94,7 @@
         <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.totalPageNo}">末页</a>
         共${requestScope.bookPageBean.totalPageNo}页，${requestScope.bookPageBean.totalRecord}条记录
         到第<input value="${requestScope.bookPageBean.pageNo}" name="pn" id="pn_input"/>页
-        <input type="button" value="确定" onclick="redirectToPage(${requestScope.bookPageBean.totalPageNo})" />
+        <input type="button" value="确定" onclick="showPaginationFromCondition(${requestScope.bookPageBean.totalPageNo})" />
     </div>
 </div>
 
@@ -119,14 +112,25 @@
             window.location.href = "http://127.0.0.1:8080/${pageContext.request.contextPath}/book?meth=delBookFromID&id="+bookID;
         }
     }
-    function redirectToPage(totalPageNo){
-        let value = document.getElementsByName("pn")[0].value;
+    <%--function redirectToPage(totalPageNo){--%>
+    <%--    let value = document.getElementsByName("pn")[0].value;--%>
+    <%--    if(value<1){--%>
+    <%--        window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo=1";--%>
+    <%--    }else if(value>totalPageNo){--%>
+    <%--        window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo="+totalPageNo;--%>
+    <%--    }else {--%>
+    <%--        window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo="+value;--%>
+    <%--    }--%>
+    <%--}--%>
+    function showPaginationFromCondition(totalPageNo) {
+        let bookName = document.getElementsByName("bookName")[0].value;//得到书的模糊名字
+        let value = document.getElementsByName("pn")[0].value;//得到你要跳转的页面数
         if(value<1){
-            window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo=1";
+            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo=1&bookName="+bookName;
         }else if(value>totalPageNo){
-            window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo="+totalPageNo;
+            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo="+totalPageNo+"&bookName="+bookName;
         }else {
-            window.location.href = "${pageContext.request.contextPath}/book?meth=showPagination&pageNo="+value;
+            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo="+value+"&bookName="+bookName;
         }
     }
 </script>
