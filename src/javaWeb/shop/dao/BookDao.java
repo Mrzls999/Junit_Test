@@ -38,4 +38,18 @@ public interface BookDao {
      * @return
      */
     public int updateBookById(String sql);
+
+    /**
+     * 得到总记录数
+     * @return
+     */
+    public int getTotalRecordCount();
+
+    /**
+     * 得到每页数据集合
+     * @param begin
+     * @param i
+     * @return
+     */
+    List<Book> getPageList(int begin, int i);
 }

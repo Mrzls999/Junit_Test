@@ -1,6 +1,7 @@
 package javaWeb.shop.service;
 
 import javaWeb.shop.entity.Book;
+import javaWeb.shop.entity.PageBean;
 
 import java.util.List;
 
@@ -38,4 +39,10 @@ public interface BookService {
      * @return 是否修改成功
      */
     public boolean updateBookById(String sql);
+
+    /**
+     * 分页展示图书信息
+     * @return
+     */
+    public PageBean<Book> showPagination(int pageNo);
 }

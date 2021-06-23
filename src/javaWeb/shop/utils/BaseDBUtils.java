@@ -3,6 +3,7 @@ package javaWeb.shop.utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -75,4 +76,23 @@ public class BaseDBUtils {
         return list;
     }
 
+    /**
+     * 获取数据库的一个数据值
+     * @param sql
+     * @param params
+     * @return
+     */
+    public Object getOneValue(String sql, Object... params) {
+        // 获取连接
+        Connection connection = JdbcUtils.getConnection();
+        Object obj = null;
+        try {
+            obj = queryRunner.query(connection, sql, new ScalarHandler<>(), params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.releaseConnection(connection);
+        }
+        return obj;
+    }
 }

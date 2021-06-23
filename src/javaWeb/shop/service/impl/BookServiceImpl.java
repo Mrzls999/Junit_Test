@@ -2,8 +2,8 @@ package javaWeb.shop.service.impl;
 
 import javaWeb.shop.dao.impl.BookDaoImpl;
 import javaWeb.shop.entity.Book;
+import javaWeb.shop.entity.PageBean;
 import javaWeb.shop.service.BookService;
-import javaWeb.shop.utils.BaseDBUtils;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ public class BookServiceImpl implements BookService {
     /**
      * 获得所有图书信息
      * 因为在jsp页面使用el表达式获取值时，如果为空，直接不进行显示，所以，这地方不需要进行非空判断
+     *
      * @return
      */
     @Override
@@ -20,6 +21,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 添加一行图书信息
+     *
      * @param sql
      * @return
      */
@@ -30,6 +32,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 删除一本书
+     *
      * @param sql
      * @return
      */
@@ -40,6 +43,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据id修改时的数据回显
+     *
      * @param sql
      * @return
      */
@@ -50,11 +54,42 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据id进行book的数据修改
+     *
      * @param sql
      * @return 是否修改了一行
      */
     @Override
     public boolean updateBookById(String sql) {
-        return new BookDaoImpl().updateBookById(sql)==1;
+        return new BookDaoImpl().updateBookById(sql) == 1;
+    }
+
+    /**
+     * 分页展示图书信息
+     *
+     * @return
+     */
+    @Override
+    public PageBean<Book> showPagination(int pageNo) {
+        //进行pageBean的封装
+        PageBean<Book> bookPageBean = new PageBean<>();
+        //1.当前页
+        bookPageBean.setPageNo(pageNo);
+        //2.每页显示记录数，固定为4
+        int pageSize = 4;
+        bookPageBean.setPageSize(pageSize);
+        //3.总记录数
+        //从数据库中获取总记录数
+        int totalRecordCount = new BookDaoImpl().getTotalRecordCount();
+        bookPageBean.setTotalRecord(totalRecordCount);
+        //4.总页数
+        bookPageBean.setTotalPageNo((int)Math.ceil((double) totalRecordCount / pageSize));
+        //5.开始位置
+        int begin = (pageNo - 1) * pageSize;
+        bookPageBean.setBegin(begin);
+        //6.每页数据集合
+        List<Book> bookList = new BookDaoImpl().getPageList(begin, pageSize);
+        bookPageBean.setList(bookList);
+
+        return bookPageBean;
     }
 }

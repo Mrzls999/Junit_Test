@@ -2,6 +2,7 @@ package javaWeb.shop.dao.impl;
 
 import javaWeb.shop.dao.BookDao;
 import javaWeb.shop.entity.Book;
+import javaWeb.shop.entity.PageBean;
 import javaWeb.shop.utils.BaseDBUtils;
 
 import java.util.List;
@@ -53,5 +54,27 @@ public class BookDaoImpl implements BookDao {
     @Override
     public int updateBookById(String sql) {
         return new BaseDBUtils().update(sql);
+    }
+
+    /**
+     * 得到总记录数
+     * @return
+     */
+    public int getTotalRecordCount() {
+        String sql = "SELECT count(1) FROM books";
+        Object totalRecordCount = new BaseDBUtils().getOneValue(sql);
+        return Integer.parseInt(totalRecordCount+"");
+    }
+
+    /**
+     * 得到每页数据集合
+     * @param begin
+     * @param i
+     * @return
+     */
+    @Override
+    public List<Book> getPageList(int begin, int i) {
+        String sql = "SELECT * FROM books LIMIT ?,?";
+        return new BaseDBUtils().getBeanList(sql, Book.class, begin, i);
     }
 }

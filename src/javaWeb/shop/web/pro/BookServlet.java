@@ -1,6 +1,7 @@
 package javaWeb.shop.web.pro;
 
 import javaWeb.shop.entity.Book;
+import javaWeb.shop.entity.PageBean;
 import javaWeb.shop.service.impl.BookServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;
@@ -109,5 +110,17 @@ public class BookServlet extends BaseServlet {
         request.getRequestDispatcher("/book?meth=getAllBooks").forward(request,response);
     }
 
-
+    /**
+     * 分页展示图书信息
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void showPagination(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pageNo = request.getParameter("pageNo");//得到你想显示的那一页
+        PageBean<Book> bookPageBean = new BookServiceImpl().showPagination(Integer.parseInt(pageNo));
+        request.setAttribute("bookPageBean",bookPageBean);
+        request.getRequestDispatcher("/shop/pages/manager/book_manager.jsp").forward(request,response);
+    }
 }
