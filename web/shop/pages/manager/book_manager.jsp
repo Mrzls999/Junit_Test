@@ -85,7 +85,12 @@
             <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.pageNo-1}">上一页</a>
         </c:if>
         <c:forEach begin="1" end="${requestScope.bookPageBean.totalPageNo}" varStatus="pNo">
-            <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${pNo.count}">${pNo.count}</a>
+            <c:if test="${requestScope.bookPageBean.pageNo==pNo.count}">
+                <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${pNo.count}"><b>【${pNo.count}】</b></a>
+            </c:if>
+            <c:if test="${requestScope.bookPageBean.pageNo!=pNo.count}">
+                <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${pNo.count}">${pNo.count}</a>
+            </c:if>
         </c:forEach>
         <c:if test="${requestScope.bookPageBean.pageNo==requestScope.bookPageBean.totalPageNo}">
             <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.totalPageNo}">下一页</a>
