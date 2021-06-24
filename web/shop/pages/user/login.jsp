@@ -10,7 +10,7 @@
 <html lang="utf-8">
 <head>
     <meta charset="UTF-8">
-    <title>尚硅谷会员登录页面</title>
+    <title>会员登录页面</title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/shop/static/css/style.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/shop/static/script/jquery-1.7.2.js"></script>
     <script type="text/javascript">
@@ -38,7 +38,7 @@
 </head>
 <body>
 <div id="login_header">
-    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif">
+<%--    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif">--%>
 </div>
 
 <div class="login_banner">
@@ -51,7 +51,7 @@
         <div class="login_form">
             <div class="login_box">
                 <div class="tit">
-                    <h1>尚硅谷会员</h1>
+                    <h1>会员登录</h1>
                 </div>
                 <div class="msg_cont">
                     <b></b>
@@ -73,7 +73,7 @@
                         <input type="submit" value="登录" id="sub_btn"/>
                     </form>
                     <div class="tit">
-                        <a href="regist.html">立即注册</a>
+                        <a href="${pageContext.request.contextPath}/shop/pages/user/regist.html">立即注册</a>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
 </div>
 <div id="bottom">
 			<span>
-				尚硅谷书城.Copyright &copy;2015
+				书城.Copyright &copy;2021
 			</span>
 </div>
 </body>

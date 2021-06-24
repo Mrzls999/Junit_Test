@@ -62,7 +62,7 @@ public class UserServlet extends BaseServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String sql = "INSERT INTO user_login(username,password,email) VALUES('"+userLogin.getUsername()+"','"+userLogin.getPassword()+"','"+userLogin.getEmail()+"')";
+        String sql = "INSERT INTO user_login(username,password,email) VALUES('"+userLogin.getUsername()+"',md5('"+userLogin.getPassword()+"'),'"+userLogin.getEmail()+"')";
         Boolean flag = new UserServiceImpl().ShopRegister_By_UserNamePasswordEmail(sql);
         if(flag){//如果注册成功，则
             response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist_success.html");

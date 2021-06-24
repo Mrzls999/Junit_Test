@@ -10,7 +10,7 @@
 <body>
 
 <div id="header">
-  <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >
+<%--  <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
   <span class="wel_word">网上书城</span>
   <div class="user">
     <a href="${pageContext.request.contextPath}/shop/pages/user/login.jsp">登录</a> |
@@ -176,7 +176,7 @@
 
 <div id="bottom">
 		<span>
-			尚硅谷书城.Copyright &copy;2015
+			书城.Copyright &copy;2021
 		</span>
 </div>
 </body>

@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <!--默认开始位置-->
-<!--    <welcome-file-list>
-        <welcome-file>/shop/pages/user/login.html</welcome-file>
-    </welcome-file-list>-->
+    <welcome-file-list>
+        <welcome-file>/shop/pages/user/login.jsp</welcome-file>
+    </welcome-file-list>
     <!--刚开始测试的-->
     <servlet>
         <servlet-name>MyServlet</servlet-name>
