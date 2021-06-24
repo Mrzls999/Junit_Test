@@ -52,4 +52,19 @@ public interface BookDao {
      * @return
      */
     List<Book> getPageList(int begin, int i);
+
+    /**
+     * 根据条件查询总记录数
+     * @return
+     */
+    int getTotalRecordCountFromCondition(String bookTitle);
+
+    /**
+     * 根据条件查询当页数据集合
+     * @param begin
+     * @param pageSize
+     * @param bookTitle
+     * @return
+     */
+    List<Book> getPageListFromCondition(int begin, int pageSize, String bookTitle);
 }

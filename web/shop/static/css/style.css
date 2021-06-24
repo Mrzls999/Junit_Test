@@ -305,6 +305,9 @@ h1 {
 #main.box_no{
 /* 	border: 0; */
 }
+a:hover{
+	cursor:pointer;
+}
 #main.box_no table td {
     width: 120px;
     text-align: center;

@@ -21,7 +21,7 @@
     <span class="wel_word">图书管理系统</span>
     <div>
 <%--        <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>--%>
-        <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=1">图书管理</a>
+        <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1&bookName="${requestScope.bookTile}">图书管理</a>
         <a href="order_manager.html">订单管理</a>
         <a href="../../index.jsp">返回商城</a>
     </div>
@@ -29,7 +29,7 @@
 
 <div id="main" class="box_no">
     <div class="book_cond">
-        图书名称：<input type="text" style="width: 100px" name="bookName">
+        图书名称：<input type="text" style="width: 100px" name="bookName" value="${requestScope.bookTile}">
         <button onclick="showPaginationFromCondition(1)">查询</button>
     </div>
     <table>
@@ -41,7 +41,7 @@
             <td>库存</td>
             <td colspan="2">操作</td>
         </tr>
-        <c:forEach items="${requestScope.bookPageBean.list}" var="book" >
+        <c:forEach items="${requestScope.bookPageBeanFromCondition.list}" var="book" >
             <tr>
                 <td>${book.title}</td>
                 <td>${book.price}</td>
@@ -49,7 +49,7 @@
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
                 <td><a href="${pageContext.request.contextPath}/book?meth=displayDataById&Id=${book.id}" class="a_green">修改</a></td>
-                <td><a onclick="delOneBook(${book.id})">删除</a></td>
+                <td><a href="javascript:void(0)" onclick="delOneBook(${book.id})">删除</a></td>
             </tr>
         </c:forEach>
         <%--看是否删除成功--%>
@@ -70,31 +70,31 @@
         </tr>
     </table>
     <div id="page_nav">
-        <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=1">首页</a>
-        <c:if test="${requestScope.bookPageBean.pageNo==1}">
-            <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=1">上一页</a>
+        <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1&bookName=${requestScope.bookTile}">首页</a>
+        <c:if test="${requestScope.bookPageBeanFromCondition.pageNo==1}">
+            <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1&bookName=${requestScope.bookTile}">上一页</a>
         </c:if>
-        <c:if test="${requestScope.bookPageBean.pageNo!=1}">
-            <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.pageNo-1}">上一页</a>
+        <c:if test="${requestScope.bookPageBeanFromCondition.pageNo!=1}">
+            <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${requestScope.bookPageBeanFromCondition.pageNo-1}&bookName=${requestScope.bookTile}">上一页</a>
         </c:if>
-        <c:forEach begin="1" end="${requestScope.bookPageBean.totalPageNo}" varStatus="pNo">
-            <c:if test="${requestScope.bookPageBean.pageNo==pNo.count}">
-                <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${pNo.count}"><b>【${pNo.count}】</b></a>
+        <c:forEach begin="1" end="${requestScope.bookPageBeanFromCondition.totalPageNo}" varStatus="pNo">
+            <c:if test="${requestScope.bookPageBeanFromCondition.pageNo==pNo.count}">
+                <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${pNo.count}&bookName=${requestScope.bookTile}"><b>【${pNo.count}】</b></a>
             </c:if>
-            <c:if test="${requestScope.bookPageBean.pageNo!=pNo.count}">
-                <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${pNo.count}">${pNo.count}</a>
+            <c:if test="${requestScope.bookPageBeanFromCondition.pageNo!=pNo.count}">
+                <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${pNo.count}&bookName=${requestScope.bookTile}">${pNo.count}</a>
             </c:if>
         </c:forEach>
-        <c:if test="${requestScope.bookPageBean.pageNo==requestScope.bookPageBean.totalPageNo}">
-            <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.totalPageNo}">下一页</a>
+        <c:if test="${requestScope.bookPageBeanFromCondition.pageNo==requestScope.bookPageBeanFromCondition.totalPageNo}">
+            <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${requestScope.bookPageBeanFromCondition.totalPageNo}&bookName=${requestScope.bookTile}">下一页</a>
         </c:if>
-        <c:if test="${requestScope.bookPageBean.pageNo!=requestScope.bookPageBean.totalPageNo}">
-            <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.pageNo+1}">下一页</a>
+        <c:if test="${requestScope.bookPageBeanFromCondition.pageNo!=requestScope.bookPageBeanFromCondition.totalPageNo}">
+            <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${requestScope.bookPageBeanFromCondition.pageNo+1}&bookName=${requestScope.bookTile}">下一页</a>
         </c:if>
-        <a href="${pageContext.request.contextPath}/book?meth=showPagination&pageNo=${requestScope.bookPageBean.totalPageNo}">末页</a>
-        共${requestScope.bookPageBean.totalPageNo}页，${requestScope.bookPageBean.totalRecord}条记录
-        到第<input value="${requestScope.bookPageBean.pageNo}" name="pn" id="pn_input"/>页
-        <input type="button" value="确定" onclick="showPaginationFromCondition(${requestScope.bookPageBean.totalPageNo})" />
+        <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=${requestScope.bookPageBeanFromCondition.totalPageNo}&bookName=${requestScope.bookTile}">末页</a>
+        共${requestScope.bookPageBeanFromCondition.totalPageNo}页，${requestScope.bookPageBeanFromCondition.totalRecord}条记录
+        到第<input value="${requestScope.bookPageBeanFromCondition.pageNo}" name="pn" id="pn_input"/>页
+        <input type="button" value="确定" onclick="showPaginationFromCondition(${requestScope.bookPageBeanFromCondition.totalPageNo})" />
     </div>
 </div>
 
@@ -126,11 +126,11 @@
         let bookName = document.getElementsByName("bookName")[0].value;//得到书的模糊名字
         let value = document.getElementsByName("pn")[0].value;//得到你要跳转的页面数
         if(value<1){
-            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo=1&bookName="+bookName;
+            window.location.href = "${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1&bookName="+bookName;
         }else if(value>totalPageNo){
-            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo="+totalPageNo+"&bookName="+bookName;
+            window.location.href = "${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo="+totalPageNo+"&bookName="+bookName;
         }else {
-            window.location.href = "${pageContext.request.contextPath}/book?meth==showPaginationFromCondition&pageNo="+value+"&bookName="+bookName;
+            window.location.href = "${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo="+value+"&bookName="+bookName;
         }
     }
 </script>

@@ -108,7 +108,7 @@ public class BookServiceImpl implements BookService {
         bookPageBean.setPageSize(pageSize);
         //3.总记录数
         //从数据库中获取总记录数
-        int totalRecordCount = new BookDaoImpl().getTotalRecordCount();
+        int totalRecordCount = new BookDaoImpl().getTotalRecordCountFromCondition(bookTitle);
         bookPageBean.setTotalRecord(totalRecordCount);
         //4.总页数
         bookPageBean.setTotalPageNo((int)Math.ceil((double) totalRecordCount / pageSize));
@@ -116,7 +116,7 @@ public class BookServiceImpl implements BookService {
         int begin = (pageNo - 1) * pageSize;
         bookPageBean.setBegin(begin);
         //6.每页数据集合
-        List<Book> bookList = new BookDaoImpl().getPageList(begin, pageSize);
+        List<Book> bookList = new BookDaoImpl().getPageListFromCondition(begin, pageSize,bookTitle);
         bookPageBean.setList(bookList);
 
         return bookPageBean;

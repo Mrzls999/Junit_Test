@@ -133,7 +133,7 @@ public class BookServlet extends BaseServlet {
      */
     protected void showPaginationFromCondition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pageNo = request.getParameter("pageNo");//得到你想显示的那一页
-        String bookTitle = request.getParameter("title");
+        String bookTitle = request.getParameter("bookName");
         PageBean<Book> bookPageBeanFromCondition = new BookServiceImpl().showPaginationFromCondition(Integer.parseInt(pageNo),bookTitle);
         request.setAttribute("bookPageBeanFromCondition",bookPageBeanFromCondition);
         request.setAttribute("bookTile",bookTitle);

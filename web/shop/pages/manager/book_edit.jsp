@@ -34,7 +34,7 @@
 <%--    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
     <span class="wel_word">编辑图书</span>
     <div>
-        <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>
+        <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1">图书管理</a>
         <a href="order_manager.html">订单管理</a>
         <a href="${pageContext.request.contextPath}/shop/index.jsp">返回商城</a>
     </div>

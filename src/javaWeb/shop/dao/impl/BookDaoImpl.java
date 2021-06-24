@@ -69,12 +69,49 @@ public class BookDaoImpl implements BookDao {
     /**
      * 得到每页数据集合
      * @param begin
-     * @param i
+     * @param pageSize
      * @return
      */
     @Override
-    public List<Book> getPageList(int begin, int i) {
+    public List<Book> getPageList(int begin, int pageSize) {
         String sql = "SELECT * FROM books LIMIT ?,?";
-        return new BaseDBUtils().getBeanList(sql, Book.class, begin, i);
+        return new BaseDBUtils().getBeanList(sql, Book.class, begin, pageSize);
+    }
+
+    /**
+     * 根据条件查询总记录数
+     * @return
+     */
+    @Override
+    public int getTotalRecordCountFromCondition(String bookTitle) {
+        String sql = "";
+        Object oneValue = null;
+        if(bookTitle==null||"".equals(bookTitle)){
+            sql = "SELECT COUNT(1) FROM books";
+            oneValue = new BaseDBUtils().getOneValue(sql);
+        }else{
+            sql = "SELECT COUNT(1) FROM books WHERE title LIKE ?";
+            oneValue = new BaseDBUtils().getOneValue(sql, "%" + bookTitle + "%");
+        }
+        return Integer.parseInt(oneValue+"");
+    }
+
+    /**
+     * 根据条件查询当页数据集合
+     * @param begin
+     * @param pageSize
+     * @param bookTitle
+     * @return
+     */
+    @Override
+    public List<Book> getPageListFromCondition(int begin, int pageSize, String bookTitle) {
+        String sql = "";
+        if(bookTitle==null||"".equals(bookTitle)){
+            sql = "SELECT * FROM books LIMIT ?,?";
+            return new BaseDBUtils().getBeanList(sql, Book.class, begin, pageSize);
+        }else {
+            sql = "SELECT * FROM books WHERE title LIKE ? LIMIT ?,?";
+            return new BaseDBUtils().getBeanList(sql, Book.class,"%"+bookTitle+"%", begin, pageSize);
+        }
     }
 }
