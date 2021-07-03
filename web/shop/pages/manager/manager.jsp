@@ -22,12 +22,12 @@
 <body>
 
 <div id="header">
-    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >
+<%--    <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
     <span class="wel_word">后台管理系统</span>
     <div>
-        <a href="${pageContext.request.contextPath}/book?meth=getAllBooks">图书管理</a>
-        <a href="order_manager.html">订单管理</a>
-        <a href="../../index.html">返回商城</a>
+        <a href="${pageContext.request.contextPath}/book?meth=showPaginationFromCondition&pageNo=1&bookName=${requestScope.bookTile}">图书管理</a>
+        <a href="${pageContext.request.contextPath}/shop/pages/manager/order_manager.html">订单管理</a>
+        <a href="${pageContext.request.contextPath}/shop/index.jsp">返回商城</a>
     </div>
 </div>
 
@@ -37,7 +37,7 @@
 
 <div id="bottom">
 		<span>
-			尚硅谷书城.Copyright &copy;2015
+			书城.Copyright &copy;2021
 		</span>
 </div>
 </body>

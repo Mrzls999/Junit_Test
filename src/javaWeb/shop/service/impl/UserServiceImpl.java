@@ -14,9 +14,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public boolean getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params) {
+    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params) {
         UserDao shop_loginDao = new UserDaoImpl();
-        return shop_loginDao.getUserFrom_UserNameAndPassWord(sql, user, params) != null;
+        return shop_loginDao.getUserFrom_UserNameAndPassWord(sql, user, params);
     }
 
     /**

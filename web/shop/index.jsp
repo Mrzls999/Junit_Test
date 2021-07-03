@@ -1,5 +1,6 @@
 <%-- Created by IntelliJ IDEA. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,14 @@
 <%--  <img class="logo_img" alt="" src="${pageContext.request.contextPath}/shop/static/img/logo.gif" >--%>
   <span class="wel_word">网上书城</span>
   <div class="user">
-    <a href="${pageContext.request.contextPath}/shop/pages/user/login.jsp">登录</a> |
-    <a href="${pageContext.request.contextPath}/shop/pages/user/regist.html">注册</a> &nbsp;&nbsp;
-    <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.jsp">购物车</a>
+    <c:if test="${empty cookie.userName}">
+      <a href="${pageContext.request.contextPath}/shop/pages/user/login.jsp">登录</a> |
+      <a href="${pageContext.request.contextPath}/shop/pages/user/regist.html">注册</a> &nbsp;&nbsp;
+    </c:if>
+    <c:if test="${not empty cookie.userName}">
+      <span>欢迎<span class="um_span">${cookie.userName.value}
+    </c:if>
+    <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.html">购物车</a>
     <a href="${pageContext.request.contextPath}/shop/pages/manager/manager.jsp">后台管理</a>
   </div>
 </div>

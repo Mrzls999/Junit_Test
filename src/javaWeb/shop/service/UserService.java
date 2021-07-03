@@ -9,7 +9,7 @@ public interface UserService {
      * @param params
      * @return
      */
-    public boolean getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params);
+    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params);
 
     /**
      * 通过sql向用户表中注册用户

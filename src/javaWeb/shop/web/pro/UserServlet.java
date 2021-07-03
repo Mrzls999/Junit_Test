@@ -21,30 +21,43 @@ public class UserServlet extends BaseServlet {
      * @throws IOException
      */
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-        UserLogin userLogin = new UserLogin();
-        try {
-            BeanUtils.populate(userLogin,request.getParameterMap());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Cookie[] cookies = request.getCookies();
+        boolean flag = true;
+        for (Cookie cookie : cookies) {
+            if("userName".equals(cookie.getName())){
+                response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
+                flag = false;
+                break;
+            }
         }
-        Class<UserLogin> aClass = null;
-        try {
-            aClass = (Class<UserLogin>) Class.forName("javaWeb.shop.entity.UserLogin");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        if (flag) {
+            UserLogin userLogin = new UserLogin();
+            try {
+                BeanUtils.populate(userLogin,request.getParameterMap());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Class<UserLogin> aClass = null;
+            try {
+                aClass = (Class<UserLogin>) Class.forName("javaWeb.shop.entity.UserLogin");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            UserService shop_loginService = new UserServiceImpl();
+            String sql = "select * from user_login " +
+                    "where username = '" + userLogin.getUsername() + "' and password = md5(" + userLogin.getPassword()+");";
+            UserLogin user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
+            if(user!=null){//如果查到了，则
+                Cookie cookie = new Cookie("userName",String.valueOf(user.getUsername()));
+                cookie.setMaxAge(60*60);
+                response.addCookie(cookie);
+                response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
+            }else {
+                request.setAttribute("msg","用户名或密码错误");
+                request.getRequestDispatcher("/shop/pages/user/login.jsp").forward(request,response);
+            }
         }
-        UserService shop_loginService = new UserServiceImpl();
-        String sql = "select * from user_login " +
-                     "where username = '" + userLogin.getUsername() + "' and password = md5(" + userLogin.getPassword()+");";
-        boolean flag = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
-        if(flag){//如果查到了，则
-            response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.html");
-        }else {
-            request.setAttribute("msg","用户名或密码错误");
-            request.getRequestDispatcher("/shop/pages/user/login.jsp").forward(request,response);
-        }
+
     }
 
     /**
@@ -68,6 +81,25 @@ public class UserServlet extends BaseServlet {
             response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist_success.html");
         }else {
             response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist.html");
+        }
+    }
+
+
+    /**
+     * 用户注销
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if("userName".equals(cookie.getName())){
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                response.sendRedirect(request.getContextPath()+"/shop/index.jsp");
+            }
         }
     }
 }
