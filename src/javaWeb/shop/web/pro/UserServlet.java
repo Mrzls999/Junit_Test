@@ -70,17 +70,26 @@ public class UserServlet extends BaseServlet {
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //UserService shop_registerService = new UserServiceImpl();
         UserLogin userLogin = new UserLogin();
-        try {
-            BeanUtils.populate(userLogin,request.getParameterMap());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String sql = "INSERT INTO user_login(username,password,email) VALUES('"+userLogin.getUsername()+"',md5('"+userLogin.getPassword()+"'),'"+userLogin.getEmail()+"')";
-        Boolean flag = new UserServiceImpl().ShopRegister_By_UserNamePasswordEmail(sql);
-        if(flag){//如果注册成功，则
-            response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist_success.html");
-        }else {
-            response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist.html");
+        String code = request.getParameter("code");//从前端获取的验证码
+        String sessionCode = (String) request.getSession().getAttribute("KAPTCHA_SESSION_KEY");//从kaptcha获取的验证码
+        if(!code.equals(sessionCode)){//如果验证码不一样，重新注册
+            request.setAttribute("registerMsg","注册失败，验证码错误");
+//          response.sendRedirect(request.getContextPath()+"/shop/pages/user/regist.jsp");
+            request.getRequestDispatcher("/shop/pages/user/regist.jsp").forward(request,response);
+        }else {//如果验证码一样
+            try {
+                BeanUtils.populate(userLogin,request.getParameterMap());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String sql = "INSERT INTO user_login(username,password,email) VALUES('"+userLogin.getUsername()+"',md5('"+userLogin.getPassword()+"'),'"+userLogin.getEmail()+"')";
+            Boolean flag = new UserServiceImpl().ShopRegister_By_UserNamePasswordEmail(sql);
+            if(flag){//如果注册成功，则
+                response.sendRedirect(request.getContextPath()+"/shop/pages/user/login.jsp");
+            }else {
+                request.setAttribute("registerMsg","注册失败");
+                request.getRequestDispatcher("/shop/pages/user/regist.jsp").forward(request,response);
+            }
         }
     }
 

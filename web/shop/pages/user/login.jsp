@@ -73,7 +73,7 @@
                         <input type="submit" value="登录" id="sub_btn"/>
                     </form>
                     <div class="tit">
-                        <a href="${pageContext.request.contextPath}/shop/pages/user/regist.html">立即注册</a>
+                        <a href="${pageContext.request.contextPath}/shop/pages/user/regist.jsp">立即注册</a>
                     </div>
                 </div>
 

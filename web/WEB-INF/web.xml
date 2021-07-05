@@ -91,5 +91,26 @@
         <servlet-name>Shop_RegisterServlet</servlet-name>
         <url-pattern>/shopRegister</url-pattern>
     </servlet-mapping>
+    <!--使用插件实现验证码功能-->
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+        <init-param>
+            <param-name>kaptcha.border</param-name>
+            <param-value>no</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.font.color</param-name>
+            <param-value>black</param-value>
+        </init-param>
+        <init-param>
+            <param-name>kaptcha.textproducer.char.space</param-name>
+            <param-value>5</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/Kaptcha.jpg</url-pattern>
+    </servlet-mapping>
 
 </web-app>
