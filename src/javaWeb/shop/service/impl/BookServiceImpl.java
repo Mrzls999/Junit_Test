@@ -74,8 +74,8 @@ public class BookServiceImpl implements BookService {
         PageBean<Book> bookPageBean = new PageBean<>();
         //1.当前页
         bookPageBean.setPageNo(pageNo);
-        //2.每页显示记录数，固定为3
-        int pageSize = 3;
+        //2.每页显示记录数，固定为4
+        int pageSize = 4;
         bookPageBean.setPageSize(pageSize);
         //3.总记录数
         //从数据库中获取总记录数

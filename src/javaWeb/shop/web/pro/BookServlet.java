@@ -121,7 +121,7 @@ public class BookServlet extends BaseServlet {
         String pageNo = request.getParameter("pageNo");//得到你想显示的那一页
         PageBean<Book> bookPageBean = new BookServiceImpl().showPagination(Integer.parseInt(pageNo));
         request.setAttribute("bookPageBean",bookPageBean);
-        request.getRequestDispatcher("/shop/pages/manager/book_manager.jsp").forward(request,response);
+        request.getRequestDispatcher("/shop/main.jsp").forward(request,response);
     }
 
     /**
