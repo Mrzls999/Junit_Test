@@ -139,4 +139,5 @@ public class BookServlet extends BaseServlet {
         request.setAttribute("bookTile",bookTitle);
         request.getRequestDispatcher("/shop/pages/manager/book_manager.jsp").forward(request,response);
     }
+
 }

@@ -23,14 +23,16 @@ public class UserServlet extends BaseServlet {
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
         boolean flag = true;
-        for (Cookie cookie : cookies) {
-            if("userName".equals(cookie.getName())){
-                response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
-                flag = false;
-                break;
+        if (cookies!=null) {//如果cookie不为空，则进行遍历，找到用户
+            for (Cookie cookie : cookies) {
+                if("userName".equals(cookie.getName())){
+                    response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
+                    flag = false;
+                    break;
+                }
             }
         }
-        if (flag) {
+        if (flag) {//如果没有关于用户登录的cookie信息，那么重新登录
             UserLogin userLogin = new UserLogin();
             try {
                 BeanUtils.populate(userLogin,request.getParameterMap());
@@ -93,7 +95,6 @@ public class UserServlet extends BaseServlet {
         }
     }
 
-
     /**
      * 用户注销
      * @param request
@@ -101,7 +102,7 @@ public class UserServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if("userName".equals(cookie.getName())){

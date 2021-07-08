@@ -68,7 +68,7 @@
             <span class="sp2">${book.stock}</span>
           </div>
           <div class="book_add">
-            <button>加入购物车</button>
+            <button onclick="addBookToCart(${book.id})">加入购物车</button>
           </div>
         </div>
       </div>
@@ -94,4 +94,9 @@
 		</span>
 </div>
 </body>
+<script>
+  function addBookToCart(bookId) {
+    window.location.href="${pageContext.request.contextPath}/cart?meth=addBookToCart&bookId="+bookId;
+  }
+</script>
 </html>
