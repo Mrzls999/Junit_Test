@@ -42,7 +42,7 @@
         <td>${cartItem.purchaseNum}</td>
         <td>${cartItem.book.price}</td>
         <td>${cartItem.purchaseAmount}</td>
-        <td><a href="#">删除</a></td>
+        <td><a href="${pageContext.request.contextPath}/cart?meth=delCartItem&bookId=${cartItem.book.id}">删除</a></td>
       </tr>
     </c:forEach>
   </table>
