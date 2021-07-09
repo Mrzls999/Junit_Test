@@ -15,8 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
+import static javafx.scene.input.KeyCode.L;
 
 @WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends BaseServlet {
@@ -30,8 +33,12 @@ public class CartServlet extends BaseServlet {
      */
     protected void getAllCartItems(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        List<CartItem> allCartItems = cart.getAllCartItems();
-        request.getSession().setAttribute("cartItems", allCartItems);
+        if (cart != null) {
+            List<CartItem> allCartItems = cart.getAllCartItems();
+            request.getSession().setAttribute("cartItems", allCartItems);
+        } else {
+            request.getSession().removeAttribute("cartItems");
+        }
         response.sendRedirect(request.getContextPath() + "/shop/pages/cart/cart.jsp");
     }
 
@@ -73,6 +80,7 @@ public class CartServlet extends BaseServlet {
 
     /**
      * 删除购物项
+     *
      * @param request
      * @param response
      */
@@ -81,13 +89,46 @@ public class CartServlet extends BaseServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart != null) {//如果购物车有东西
             String bookId = request.getParameter("bookId");
-            cart.setTotalProductsNums(cart.getTotalProductsNums()-cart.getMap().get(bookId).getPurchaseNum());
+            cart.setTotalProductsNums(cart.getTotalProductsNums() - cart.getMap().get(bookId).getPurchaseNum());
             cart.setTotalAmount(cart.getTotalAmount().subtract(cart.getMap().get(bookId).getPurchaseAmount()));
             cart.delCartItem(bookId);
-            session.setAttribute("cart",cart);
+            session.setAttribute("cart", cart);
             getAllCartItems(request, response);
         }
         //如果购物车没有东西，那就算了。
     }
 
+    /**
+     * 清除购物车
+     *
+     * @param request
+     * @param response
+     */
+    protected void clearCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("cart");
+        getAllCartItems(request, response);
+    }
+
+    /**
+     * 更改购物车图书数量
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    protected void updateBookNums(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        String bookId = request.getParameter("bookId");//得到商品id
+        int nums = Integer.parseInt(request.getParameter("nums"));//得到要修改的这个图书的数量
+        if (nums < 1) {//如果小于1个，直接删除这个购物项
+            delCartItem(request, response);
+        }else{//否则
+            cart.setTotalProductsNums(cart.getTotalProductsNums() + (nums - cart.getMap().get(bookId).getPurchaseNum()));
+            cart.setTotalAmount(cart.getTotalAmount().add(BigDecimal.valueOf((long) (nums - cart.getMap().get(bookId).getPurchaseNum())).multiply(cart.getMap().get(bookId).getBook().getPrice())));
+            cart.updateBookNums(bookId, nums);
+            session.setAttribute("cart", cart);
+            getAllCartItems(request, response);
+        }
+    }
 }

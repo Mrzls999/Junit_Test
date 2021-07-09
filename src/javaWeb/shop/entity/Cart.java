@@ -46,6 +46,7 @@ public class Cart {
     public void updateBookNums(String bookId,int nums){
         CartItem cartItem = map.get(bookId);
         cartItem.setPurchaseNum(nums);
+        cartItem.setPurchaseAmount(cartItem.getPurchaseAmount().add(BigDecimal.valueOf(nums-cartItem.getPurchaseNum()).multiply(cartItem.getBook().getPrice())));
     }
 
     public Cart() {
