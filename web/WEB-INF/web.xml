@@ -112,5 +112,13 @@
         <servlet-name>KaptchaServlet</servlet-name>
         <url-pattern>/Kaptcha.jpg</url-pattern>
     </servlet-mapping>
-
+    <!--FilterDemo拦截器过滤测试-->
+    <filter>
+        <filter-name>filterDemo</filter-name>
+        <filter-class>javaWeb.demo.FilterDemo</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filterDemo</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
