@@ -63,7 +63,6 @@
         <servlet-name>ServletContext_Test3</servlet-name>
         <url-pattern>/servletContext3</url-pattern>
     </servlet-mapping>
-
     <!--测试BeanUtils-->
     <servlet>
         <servlet-name>Servlet_BeanUtils</servlet-name>
