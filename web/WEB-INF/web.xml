@@ -120,4 +120,8 @@
         <filter-name>filterDemo</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--ServletContext监听器的初步使用-->
+    <listener>
+        <listener-class>javaWeb.demo.ListenerDemo</listener-class>
+    </listener>
 </web-app>
