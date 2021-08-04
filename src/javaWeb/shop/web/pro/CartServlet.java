@@ -60,7 +60,7 @@ public class CartServlet extends BaseServlet {
             if (cartItem == null) {//如果没有这个购物项，则重新添加一个
                 sessionCart.addBookToCart(bookId);
                 sessionCart.setTotalProductsNums(sessionCart.getTotalProductsNums() + 1);
-                sessionCart.setTotalAmount(sessionCart.getTotalAmount().add(new BookServiceImpl().displayDataById("SELECT * FROM books WHERE id=" + bookId).getPrice()));
+                sessionCart.setTotalAmount(sessionCart.getTotalAmount().add(new BookServiceImpl().displayDataById("SELECT * FROM t_books WHERE id=" + bookId).getPrice()));
             } else {
                 cartItem.setPurchaseNum(cartItem.getPurchaseNum() + 1);
                 cartItem.setPurchaseAmount(cartItem.getPurchaseAmount().add(cartItem.getBook().getPrice()));
@@ -72,7 +72,7 @@ public class CartServlet extends BaseServlet {
             Cart cart = new Cart();
             cart.addBookToCart(bookId);
             cart.setTotalProductsNums(1);
-            cart.setTotalAmount(new BookServiceImpl().displayDataById("SELECT * FROM books WHERE id=" + bookId).getPrice());
+            cart.setTotalAmount(new BookServiceImpl().displayDataById("SELECT * FROM t_books WHERE id=" + bookId).getPrice());
             session.setAttribute("cart", cart);
         }
         getAllCartItems(request, response);

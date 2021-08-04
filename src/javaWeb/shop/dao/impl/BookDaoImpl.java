@@ -14,7 +14,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public List<Book> getAllBooks() {
-        return new BaseDBUtils().getBeanList("SELECT * FROM books", Book.class);
+        return new BaseDBUtils().getBeanList("SELECT * FROM t_books", Book.class);
     }
 
     /**
@@ -61,7 +61,7 @@ public class BookDaoImpl implements BookDao {
      * @return
      */
     public int getTotalRecordCount() {
-        String sql = "SELECT count(1) FROM books";
+        String sql = "SELECT count(1) FROM t_books";
         Object totalRecordCount = new BaseDBUtils().getOneValue(sql);
         return Integer.parseInt(totalRecordCount+"");
     }
@@ -74,7 +74,7 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public List<Book> getPageList(int begin, int pageSize) {
-        String sql = "SELECT * FROM books LIMIT ?,?";
+        String sql = "SELECT * FROM t_books LIMIT ?,?";
         return new BaseDBUtils().getBeanList(sql, Book.class, begin, pageSize);
     }
 
@@ -87,10 +87,10 @@ public class BookDaoImpl implements BookDao {
         String sql = "";
         Object oneValue = null;
         if(bookTitle==null||"".equals(bookTitle)){
-            sql = "SELECT COUNT(1) FROM books";
+            sql = "SELECT COUNT(1) FROM t_books";
             oneValue = new BaseDBUtils().getOneValue(sql);
         }else{
-            sql = "SELECT COUNT(1) FROM books WHERE title LIKE ?";
+            sql = "SELECT COUNT(1) FROM t_books WHERE title LIKE ?";
             oneValue = new BaseDBUtils().getOneValue(sql, "%" + bookTitle + "%");
         }
         return Integer.parseInt(oneValue+"");
@@ -107,10 +107,10 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getPageListFromCondition(int begin, int pageSize, String bookTitle) {
         String sql = "";
         if(bookTitle==null||"".equals(bookTitle)){
-            sql = "SELECT * FROM books LIMIT ?,?";
+            sql = "SELECT * FROM t_books LIMIT ?,?";
             return new BaseDBUtils().getBeanList(sql, Book.class, begin, pageSize);
         }else {
-            sql = "SELECT * FROM books WHERE title LIKE ? LIMIT ?,?";
+            sql = "SELECT * FROM t_books WHERE title LIKE ? LIMIT ?,?";
             return new BaseDBUtils().getBeanList(sql, Book.class,"%"+bookTitle+"%", begin, pageSize);
         }
     }

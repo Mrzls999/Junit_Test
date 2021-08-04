@@ -46,7 +46,7 @@ public class UserServlet extends BaseServlet {
                 e.printStackTrace();
             }
             UserService shop_loginService = new UserServiceImpl();
-            String sql = "select * from user_login " +
+            String sql = "select * from t_users " +
                     "where username = '" + userLogin.getUsername() + "' and password = md5(" + userLogin.getPassword()+");";
             UserLogin user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
             if(user!=null){//如果查到了，则

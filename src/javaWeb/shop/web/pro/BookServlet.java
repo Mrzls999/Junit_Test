@@ -80,7 +80,7 @@ public class BookServlet extends BaseServlet {
      */
     protected void displayDataById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("Id");
-        String sql = "SELECT * FROM books WHERE id="+id;
+        String sql = "SELECT * FROM t_books WHERE id="+id;
         Book book = new BookServiceImpl().displayDataById(sql);
         request.setAttribute("bookById",book);
         request.getRequestDispatcher("/shop/pages/manager/book_edit.jsp").forward(request,response);
