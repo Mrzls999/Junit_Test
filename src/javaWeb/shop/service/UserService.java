@@ -1,5 +1,5 @@
 package javaWeb.shop.service;
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 
 public interface UserService {
     /**
@@ -9,7 +9,7 @@ public interface UserService {
      * @param params
      * @return
      */
-    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params);
+    public User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object... params);
 
     /**
      * 通过sql向用户表中注册用户

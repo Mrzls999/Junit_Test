@@ -2,16 +2,16 @@ package javaWeb.shop.entity;
 
 import java.math.BigInteger;
 
-public class UserLogin {
+public class User {
     private Long uid;
     private String username;
     private String password;
     private String email;
 
-    public UserLogin() {
+    public User() {
     }
 
-    public UserLogin(Long uid, String username, String password, String email) {
+    public User(Long uid, String username, String password, String email) {
         this.uid = uid;
         this.username = username;
         this.password = password;

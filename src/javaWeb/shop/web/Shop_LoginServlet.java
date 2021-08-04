@@ -1,6 +1,6 @@
 package javaWeb.shop.web;
 
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 import javaWeb.shop.service.UserService;
 import javaWeb.shop.service.impl.UserServiceImpl;
 
@@ -18,15 +18,15 @@ public class Shop_LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Class<UserLogin> aClass = null;
+        Class<User> aClass = null;
         try {
-            aClass = (Class<UserLogin>) Class.forName("javaWeb.shop.entity.UserLogin");
+            aClass = (Class<User>) Class.forName("javaWeb.shop.entity.User");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         UserService shop_loginService = new UserServiceImpl();
         String sql = "select * from t_users where username = '" + username + "' and password = md5(" + password+");";
-        UserLogin user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
+        User user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
         if(user!=null){//如果查到了，则
             response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.html");
         }else {

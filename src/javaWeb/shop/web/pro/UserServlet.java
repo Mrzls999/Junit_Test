@@ -1,6 +1,6 @@
 package javaWeb.shop.web.pro;
 
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 import javaWeb.shop.service.UserService;
 import javaWeb.shop.service.impl.UserServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
@@ -33,22 +33,22 @@ public class UserServlet extends BaseServlet {
             }
         }
         if (flag) {//如果没有关于用户登录的cookie信息，那么重新登录
-            UserLogin userLogin = new UserLogin();
+            User userLogin = new User();
             try {
                 BeanUtils.populate(userLogin,request.getParameterMap());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Class<UserLogin> aClass = null;
+            Class<User> aClass = null;
             try {
-                aClass = (Class<UserLogin>) Class.forName("javaWeb.shop.entity.UserLogin");
+                aClass = (Class<User>) Class.forName("javaWeb.shop.entity.User");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
             UserService shop_loginService = new UserServiceImpl();
             String sql = "select * from t_users " +
                     "where username = '" + userLogin.getUsername() + "' and password = md5(" + userLogin.getPassword()+");";
-            UserLogin user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
+            User user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
             if(user!=null){//如果查到了，则
                 Cookie cookie = new Cookie("userName",String.valueOf(user.getUsername()));
                 cookie.setMaxAge(60*60);
@@ -71,7 +71,7 @@ public class UserServlet extends BaseServlet {
      */
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //UserService shop_registerService = new UserServiceImpl();
-        UserLogin userLogin = new UserLogin();
+        User user = new User();
         String code = request.getParameter("code");//从前端获取的验证码
         String sessionCode = (String) request.getSession().getAttribute("KAPTCHA_SESSION_KEY");//从kaptcha获取的验证码
         if(!code.equals(sessionCode)){//如果验证码不一样，重新注册
@@ -80,11 +80,11 @@ public class UserServlet extends BaseServlet {
             request.getRequestDispatcher("/shop/pages/user/regist.jsp").forward(request,response);
         }else {//如果验证码一样
             try {
-                BeanUtils.populate(userLogin,request.getParameterMap());
+                BeanUtils.populate(user,request.getParameterMap());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String sql = "INSERT INTO user_login(username,password,email) VALUES('"+userLogin.getUsername()+"',md5('"+userLogin.getPassword()+"'),'"+userLogin.getEmail()+"')";
+            String sql = "INSERT INTO user_login(username,password,email) VALUES('"+ user.getUsername()+"',md5('"+ user.getPassword()+"'),'"+ user.getEmail()+"')";
             Boolean flag = new UserServiceImpl().ShopRegister_By_UserNamePasswordEmail(sql);
             if(flag){//如果注册成功，则
                 response.sendRedirect(request.getContextPath()+"/shop/pages/user/login.jsp");

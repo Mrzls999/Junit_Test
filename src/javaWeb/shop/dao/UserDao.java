@@ -1,6 +1,6 @@
 package javaWeb.shop.dao;
 
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 
 public interface UserDao {
     /**
@@ -10,7 +10,7 @@ public interface UserDao {
      * @param params
      * @return
      */
-    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object...params);
+    public User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object...params);
     /**
      * 通过sql向用户表中注册用户
      * @param sql insert语句

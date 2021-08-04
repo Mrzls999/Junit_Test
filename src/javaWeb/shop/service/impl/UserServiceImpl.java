@@ -2,7 +2,7 @@ package javaWeb.shop.service.impl;
 
 import javaWeb.shop.dao.UserDao;
 import javaWeb.shop.dao.impl.UserDaoImpl;
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 import javaWeb.shop.service.UserService;
 
 public class UserServiceImpl implements UserService {
@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params) {
+    public User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object... params) {
         UserDao shop_loginDao = new UserDaoImpl();
         return shop_loginDao.getUserFrom_UserNameAndPassWord(sql, user, params);
     }

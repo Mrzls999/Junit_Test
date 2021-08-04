@@ -1,7 +1,7 @@
 package javaWeb.shop.dao.impl;
 
 import javaWeb.shop.dao.UserDao;
-import javaWeb.shop.entity.UserLogin;
+import javaWeb.shop.entity.User;
 import javaWeb.shop.utils.BaseDBUtils;
 
 public class UserDaoImpl extends BaseDBUtils implements UserDao {
@@ -13,7 +13,7 @@ public class UserDaoImpl extends BaseDBUtils implements UserDao {
      * @return
      */
     @Override
-    public UserLogin getUserFrom_UserNameAndPassWord(String sql, Class<UserLogin> user, Object... params) {
+    public User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object... params) {
         BaseDBUtils baseDBUtils = new BaseDBUtils();
         return baseDBUtils.getBean(sql, user, params);
     }
