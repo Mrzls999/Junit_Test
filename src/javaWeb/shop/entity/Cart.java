@@ -23,7 +23,7 @@ public class Cart {
     public void addBookToCart(String bookId) {//应该是有一个是否添加成功的标识的
         CartItem cartItem = map.get(bookId);//获取这个图书
         if (cartItem == null) {//如果为空，那么说明购物车中没有这个图书信息，第一次添加
-            String sql = "SELECT * FROM books WHERE id=" + bookId;
+            String sql = "SELECT * FROM t_books WHERE id=" + bookId;
             Book book = new BookServiceImpl().displayDataById(sql);
             map.put(bookId, new CartItem(book, 1, book.getPrice()));
         } else {//如果不空，那么说明购物车中有这个图书信息，在这个的基础上添加

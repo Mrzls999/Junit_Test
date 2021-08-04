@@ -23,7 +23,7 @@ public class UserServlet extends BaseServlet {
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
         boolean flag = true;
-        if (cookies!=null) {//如果cookie不为空，则进行遍历，找到用户
+        if (cookies!=null&&request.getSession().getAttribute("user")!=null) {//如果cookie不为空，则进行遍历，找到用户；并且有session域的user，这个是后期为了生成订单时使用，其实只使用这个就行
             for (Cookie cookie : cookies) {
                 if("userName".equals(cookie.getName())){
                     response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
@@ -50,7 +50,8 @@ public class UserServlet extends BaseServlet {
                     "where username = '" + userLogin.getUsername() + "' and password = md5(" + userLogin.getPassword()+");";
             User user = shop_loginService.getUserFrom_UserNameAndPassWord(sql, aClass);
             if(user!=null){//如果查到了，则
-                Cookie cookie = new Cookie("userName",String.valueOf(user.getUsername()));
+                Cookie cookie = new Cookie("userName",user.getUsername());
+                request.getSession().setAttribute("user",user);
                 cookie.setMaxAge(60*60);
                 response.addCookie(cookie);
                 response.sendRedirect(request.getContextPath()+"/shop/pages/user/login_success.jsp");
@@ -104,12 +105,13 @@ public class UserServlet extends BaseServlet {
      */
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Cookie[] cookies = request.getCookies();
+        request.getSession().removeAttribute("user");//移除session域的用户信息
         for (Cookie cookie : cookies) {
             if("userName".equals(cookie.getName())){
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
-                response.sendRedirect(request.getContextPath()+"/shop/index.jsp");
             }
         }
+        response.sendRedirect(request.getContextPath()+"/shop/index.jsp");
     }
 }

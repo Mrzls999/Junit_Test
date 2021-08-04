@@ -20,7 +20,7 @@
 <%--  <img class="logo_img" alt="" src="/shop/static/img/logo.gif" >--%>
   <span class="wel_word">购物车</span>
   <div>
-    <span>欢迎<span class="um_span">${cookie.userName.value}</span>光临会员书城</span>
+    <span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临会员书城</span>
     <a href="../order/order.html">我的订单</a>
     <a href="${pageContext.request.contextPath}/user?meth=logout">注销</a>&nbsp;&nbsp;
     <a href="${pageContext.request.contextPath}/shop/index.jsp">返回</a>
@@ -28,6 +28,7 @@
 </div>
 
 <div id="main" class="box_order">
+  <span style="color:red">${requestScope.msg}</span>
   <table>
     <tr>
       <td>商品名称</td>
@@ -52,8 +53,8 @@
     <span class="cart_span">购物车中共有<span class="b_count">${sessionScope.cart.totalProductsNums}</span>件商品</span>
     <span class="cart_span">总金额<span class="b_price">${sessionScope.cart.totalAmount}</span>元</span>
     <span class="cart_span"><a href="${pageContext.request.contextPath}/cart?meth=clearCart">清空购物车</a></span>
-    <span class="cart_span"><a href="#">继续购物</a></span>
-    <span class="cart_span"><a href="${pageContext.request.contextPath}/shop/pages/cart/checkout.html">去结账</a></span>
+    <span class="cart_span"><a href="${pageContext.request.contextPath}/shop/index.jsp">继续购物</a></span>
+    <span class="cart_span"><a href="${pageContext.request.contextPath}/order?meth=createOrders">去结账</a></span>
   </div>
 
 </div>

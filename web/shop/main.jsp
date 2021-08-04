@@ -19,9 +19,10 @@
       <a href="${pageContext.request.contextPath}/shop/pages/user/regist.html">注册</a> &nbsp;&nbsp;
     </c:if>
     <c:if test="${not empty cookie.userName}">
-    <span>欢迎<span class="um_span">${cookie.userName.value}
+<%--    <span>欢迎<span class="um_span">${cookie.userName.value}--%>
+    <span>欢迎<span class="um_span">${sessionScope.user.username}
     </c:if>
-    <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.html">购物车</a>
+    <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.jsp">购物车</a>
     <a href="${pageContext.request.contextPath}/shop/pages/manager/manager.jsp">后台管理</a>
   </div>
 </div>
