@@ -41,7 +41,7 @@
       <tr>
         <td>${cartItem.book.title}</td>
         <td>
-          <input id="cartItemNums" onblur="updateBookNums(${cartItem.book.id})" type="text" size="10" value="${cartItem.purchaseNum}" />
+          <input class="cartItemNums" onblur="updateBookNums(${cartItem.book.id},this.value)" type="text" size="10" value="${cartItem.purchaseNum}" />
         </td>
         <td>${cartItem.book.price}</td>
         <td>${cartItem.purchaseAmount}</td>
@@ -66,9 +66,9 @@
 </div>
 </body>
 <script>
-  function updateBookNums(bookId) {
-    let cartItemNums = document.getElementById("cartItemNums").value;
-    location.href = "${pageContext.request.contextPath}/cart?meth=updateBookNums&bookId="+bookId+"&nums="+cartItemNums;
+  function updateBookNums(bookId,value) {
+    let cartItemNum = value;
+    location.href = "${pageContext.request.contextPath}/cart?meth=updateBookNums&bookId="+bookId+"&nums="+cartItemNum;
   }
 </script>
 </html>
