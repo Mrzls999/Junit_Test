@@ -22,7 +22,7 @@
 <%--    <span>欢迎<span class="um_span">${cookie.userName.value}--%>
     <span>欢迎<span class="um_span">${sessionScope.user.username}
     </c:if>
-    <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.jsp">购物车</a>
+    <a href="${pageContext.request.contextPath}/cart?meth=getAllCartItems">购物车</a>
     <a href="${pageContext.request.contextPath}/shop/pages/manager/manager.jsp">后台管理</a>
   </div>
 </div>

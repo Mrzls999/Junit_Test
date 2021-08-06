@@ -4,10 +4,11 @@ import javaWeb.shop.entity.OrderItem;
 import javaWeb.shop.entity.Orders;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public interface OrderDao {
     //插入订单
-    void saveOrder(Connection connection, Orders orders);
+    int saveOrder(Connection connection,Orders orders) throws SQLException;
     //插入订单项
-    void saveOrderItem(Connection connection,OrderItem orderItem);
+    int saveOrderItem(Connection connection,OrderItem orderItem) throws SQLException;
 }

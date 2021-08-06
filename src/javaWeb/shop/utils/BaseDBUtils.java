@@ -15,25 +15,23 @@ public class BaseDBUtils {
 
     /**
      * 通用的 事务 增删改操作
+     *
      * @param sql
      * @param params
      * @return
      */
-    public int update_rollback(Connection connection,String sql, Object... params) {
+    public int update_rollback(Connection connection, String sql, Object... params) throws SQLException {
         // 获取连接
         int count = 0;
-        try {
-            count = queryRunner.update(connection, sql, params);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        count = queryRunner.update(connection, sql, params);
         return count;
     }
 
 
     /**
      * 通用的增删改操作
-     * 			sql: insert delete update
+     * sql: insert delete update
+     *
      * @param sql
      * @param params
      * @return
@@ -60,12 +58,12 @@ public class BaseDBUtils {
      * @return
      */
     //查询返回对象进一步封装
-    public <T> T getBean(String sql,Class<T> type,Object...params) {
+    public <T> T getBean(String sql, Class<T> type, Object... params) {
         // 获取连接
         Connection connection = JdbcUtils.getConnection();
         T t = null;
         try {
-            t = queryRunner.query(connection, sql, new BeanHandler<T>(type),params);
+            t = queryRunner.query(connection, sql, new BeanHandler<T>(type), params);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -77,6 +75,7 @@ public class BaseDBUtils {
 
     /**
      * 获取所有对象
+     *
      * @param sql
      * @param params
      * @return
@@ -97,6 +96,7 @@ public class BaseDBUtils {
 
     /**
      * 获取数据库的一个数据值
+     *
      * @param sql
      * @param params
      * @return

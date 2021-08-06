@@ -14,25 +14,28 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     /**
      * 插入订单
+     *
      * @param orders
      */
     @Override
-    public void saveOrder(Orders orders) {
-        Connection connection = null;
+    public int saveOrder(Orders orders) {
+        Connection connection = JdbcUtils.getConnection();
+        int order_count = 0;
         try {
-            connection = JdbcUtils.getConnection();
             connection.setAutoCommit(false);
             //插入订单
             OrderDao orderDao = new OrderDaoImpl();
-            orderDao.saveOrder(connection,orders);
+            order_count = orderDao.saveOrder(connection, orders);
             //插入订单项
             List<OrderItem> list = orders.getList();
             for (OrderItem orderItem : list) {
-                new OrderDaoImpl().saveOrderItem(connection,orderItem);
+                new OrderDaoImpl().saveOrderItem(connection, orderItem);
             }
             DbUtils.commitAndCloseQuietly(connection);
         }catch (Exception e){
             DbUtils.rollbackAndCloseQuietly(connection);
+            return 0;
         }
+        return order_count;
     }
 }

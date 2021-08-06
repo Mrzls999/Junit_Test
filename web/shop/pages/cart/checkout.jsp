@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>结算页面</title>
-    <link type="text/css" rel="stylesheet" href="../../static/css/style.css" >
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/shop/static/css/style.css" >
     <style type="text/css">
         h1 {
             text-align: center;
@@ -28,7 +28,7 @@
         <span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临书城</span>
         <a href="../order/order.html">我的订单</a>
         <a href="${pageContext.request.contextPath}/user?meth=logout">注销</a>&nbsp;&nbsp;
-        <a href="${pageContext.request.contextPath}/shop/pages/cart/cart.jsp">返回</a>
+        <a href="${pageContext.request.contextPath}/cart?meth=getAllCartItems">返回</a>
     </div>
 </div>
 
