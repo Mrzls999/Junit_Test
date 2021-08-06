@@ -12,6 +12,25 @@ import java.util.List;
 public class BaseDBUtils {
 
     private QueryRunner queryRunner = new QueryRunner();
+
+    /**
+     * 通用的 事务 增删改操作
+     * @param sql
+     * @param params
+     * @return
+     */
+    public int update_rollback(Connection connection,String sql, Object... params) {
+        // 获取连接
+        int count = 0;
+        try {
+            count = queryRunner.update(connection, sql, params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+
     /**
      * 通用的增删改操作
      * 			sql: insert delete update

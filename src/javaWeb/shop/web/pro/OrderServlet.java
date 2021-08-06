@@ -2,6 +2,8 @@ package javaWeb.shop.web.pro;
 
 import com.alibaba.druid.util.StringUtils;
 import javaWeb.shop.entity.*;
+import javaWeb.shop.service.OrderService;
+import javaWeb.shop.service.impl.OrderServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -46,8 +48,16 @@ public class OrderServlet extends BaseServlet {
                     orderItem.setAmount(cartItem.getPurchaseAmount());//购买金额
                     orderItem.setBook(cartItem.getBook());//订单项包含的图书
                     orderItem.setCount(cartItem.getPurchaseNum());//购买数量
-                    orders.getList().add(orderItem);//将订单项添加到订单中
+//                    List<OrderItem> list1 = orders.getList();
+//                    list1.add(orderItem);
+                    orders.getList().add(orderItem);//换过来
+//                    orders.setList(list1);//将订单项添加到订单中
                 }
+                OrderService orderService = new OrderServiceImpl();//多态获取对象
+                orderService.saveOrder(orders);//向数据库中插入数据
+                request.setAttribute("orderNo",orders.getOid());
+                new CartServlet().clearCart(request,response);//购物车清除
+                request.getRequestDispatcher("/shop/pages/cart/checkout.jsp").forward(request,response);
             }
         }
     }
