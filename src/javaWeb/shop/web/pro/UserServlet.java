@@ -60,7 +60,6 @@ public class UserServlet extends BaseServlet {
                 request.getRequestDispatcher("/shop/pages/user/login.jsp").forward(request,response);
             }
         }
-
     }
 
     /**
