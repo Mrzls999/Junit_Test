@@ -4,7 +4,6 @@ import com.alibaba.druid.util.StringUtils;
 import javaWeb.shop.entity.*;
 import javaWeb.shop.service.OrderService;
 import javaWeb.shop.service.impl.OrderServiceImpl;
-import javaWeb.shop.utils.JdbcUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
