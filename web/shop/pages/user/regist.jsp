@@ -19,53 +19,6 @@
         }
     </style>
     <script type="text/javascript" src="${pageContext.request.contextPath}/shop/static/script/jquery-1.7.2.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            /*
-            a)用户名、密码：只能是字母（大小写）、数字、_。6-18位。
-            b)邮箱：API中的标准验证。
-            * */
-            //关联submit按钮单击事件
-            $("#sub_btn").click(function () {
-                //定义正则规则
-                var utilReg = /^\w{6,18}$/;
-                //验证用户名
-                //获取用户名数据
-                var username = $("#username").val();
-                if(!utilReg.test(username)){
-                    alert("用户名输入有误，请重新输入。【用户名只能是字母（大小写）、数字、_。6-18位】");
-                    return false;
-                }
-                //验证密码
-                var pwdValue = $("#password").val();
-                if(!utilReg.test(pwdValue)){
-                    alert("密码输入有误，请重新输入。【密码只能是字母（大小写）、数字、_。6-18位】");
-                    return false;
-                }
-                //验证【确认密码】
-                var rePwdValue = $("#repwd").val();
-                if(pwdValue !== rePwdValue){
-                    alert("两次密码输入不一致，请重新输入！");
-                    return false;
-                }
-                //验证【邮箱】   b)邮箱：API中的标准验证。	zhang.san@16-3.com.cn   512111559@qq.com
-                var emailValue = $("#email").val();
-                var emailReg = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
-                if(!emailReg.test(emailValue)){
-                    alert("邮箱格式有误，请重新输入！");
-                    return false;
-                }
-                //验证【验证码】，非空
-                var codeValue = $("#code").val();
-                if(codeValue === "" || codeValue == null){
-                    alert("验证码不能为空，请重新输入！");
-                    return false;
-                }
-
-            });
-
-        });
-    </script>
 </head>
 <body>
 <div id="login_header">
@@ -129,5 +82,77 @@
     function verifyCode() {
         document.getElementById("sessionCode").src="${pageContext.request.contextPath}/Kaptcha.jpg?random=x";
     }
+    $(function (){
+        /*
+ a)用户名、密码：只能是字母（大小写）、数字、_。6-18位。
+ b)邮箱：API中的标准验证。
+ * */
+        //关联submit按钮单击事件
+        let can_Register = false;
+        $("#sub_btn").click(function () {
+            //如果用户名重复，直接返回false
+            if(!can_Register){
+                return false;
+            }
+            //定义正则规则
+            let utilReg = /^\w{6,18}$/;
+            //验证用户名
+            //获取用户名数据
+            let username = $("#username").val();
+            if(!utilReg.test(username)){
+                alert("用户名输入有误，请重新输入。【用户名只能是字母（大小写）、数字、_。6-18位】");
+                return false;
+            }
+            //验证密码
+            let pwdValue = $("#password").val();
+            if(!utilReg.test(pwdValue)){
+                alert("密码输入有误，请重新输入。【密码只能是字母（大小写）、数字、_。6-18位】");
+                return false;
+            }
+            //验证【确认密码】
+            let rePwdValue = $("#repwd").val();
+            if(pwdValue !== rePwdValue){
+                alert("两次密码输入不一致，请重新输入！");
+                return false;
+            }
+            //验证【邮箱】   b)邮箱：API中的标准验证。	zhang.san@16-3.com.cn   512111559@qq.com
+            let emailValue = $("#email").val();
+            let emailReg = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
+            if(!emailReg.test(emailValue)){
+                alert("邮箱格式有误，请重新输入！");
+                return false;
+            }
+            //验证【验证码】，非空
+            let codeValue = $("#code").val();
+            if(codeValue === "" || codeValue == null){
+                alert("验证码不能为空，请重新输入！");
+                return false;
+            }
+
+        });
+        $("#username").blur(function(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/user?meth=checkUserName",
+                type:"post",
+                data:{
+                    username:$("#username").val()
+                },
+                dataType:"json",
+                success:function(datas){
+                    if(datas.code===10000) {
+                        can_Register=true;
+                        $("#registerName").remove();
+                        $("#username").after("<span id='registerName' style='color:green;font-size:10px'><br>该用户名可以注册</span>");
+                    }else{
+                        $("#registerName").remove();
+                        $("#username").after("<span id='registerName' style='color:red;font-size:10px'><br>该用户名已被注册</span>");
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            })
+        })
+    })
 </script>
 </html>

@@ -9,7 +9,7 @@ public interface UserService {
      * @param params
      * @return
      */
-    public User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object... params);
+    User getUserFrom_UserNameAndPassWord(String sql, Class<User> user, Object... params);
 
     /**
      * 通过sql向用户表中注册用户
@@ -17,5 +17,12 @@ public interface UserService {
      * @param params 传入的参数
      * @return 是否成功
      */
-    public Boolean ShopRegister_By_UserNamePasswordEmail(String sql, Object... params);
+    Boolean ShopRegister_By_UserNamePasswordEmail(String sql, Object... params);
+
+    /**
+     * 检查是否存在重名
+     * @param params
+     * @return
+     */
+    boolean checkUserName(String sql,Object... params);
 }

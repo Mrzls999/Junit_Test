@@ -1,5 +1,7 @@
 package javaWeb.shop.web.pro;
 
+import com.google.gson.Gson;
+import javaWeb.shop.entity.R;
 import javaWeb.shop.entity.User;
 import javaWeb.shop.service.UserService;
 import javaWeb.shop.service.impl.UserServiceImpl;
@@ -84,7 +86,7 @@ public class UserServlet extends BaseServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            String sql = "INSERT INTO user_login(username,password,email) VALUES('"+ user.getUsername()+"',md5('"+ user.getPassword()+"'),'"+ user.getEmail()+"')";
+            String sql = "INSERT INTO t_users(username,password,email) VALUES('"+ user.getUsername()+"',md5('"+ user.getPassword()+"'),'"+ user.getEmail()+"')";
             Boolean flag = new UserServiceImpl().ShopRegister_By_UserNamePasswordEmail(sql);
             if(flag){//如果注册成功，则
                 response.sendRedirect(request.getContextPath()+"/shop/pages/user/login.jsp");
@@ -93,6 +95,29 @@ public class UserServlet extends BaseServlet {
                 request.getRequestDispatcher("/shop/pages/user/regist.jsp").forward(request,response);
             }
         }
+    }
+
+    /**
+     * 检测此用户名是否存在
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    protected void checkUserName(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String username = request.getParameter("username");
+        UserService userService = new UserServiceImpl();
+        String sql = "SELECT username FROM t_users WHERE username = ?";
+        boolean isExitUserName = userService.checkUserName(sql,username);
+        Gson gson = new Gson();
+        String json;
+        if (isExitUserName) {//如果存在该名字
+            R error = R.error();
+            json = gson.toJson(error);
+        }else {
+            R ok = R.ok();
+            json = gson.toJson(ok);
+        }
+        response.getWriter().write(json);
     }
 
     /**

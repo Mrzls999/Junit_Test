@@ -18,4 +18,11 @@ public interface UserDao {
      * @return 是否成功
      */
     public Boolean ShopRegister_By_UserNamePasswordEmail(String sql, Object... params);
+
+    /**
+     * 检查是否存在重名
+     * @param params
+     * @return
+     */
+    boolean checkUserName(String sql,Object... params);
 }

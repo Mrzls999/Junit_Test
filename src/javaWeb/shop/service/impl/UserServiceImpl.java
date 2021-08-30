@@ -30,4 +30,15 @@ public class UserServiceImpl implements UserService {
         UserDao shop_registerDao = new UserDaoImpl();
         return shop_registerDao.ShopRegister_By_UserNamePasswordEmail(sql, params);
     }
+
+    /**
+     * 检查是否存在重名
+     * @param params
+     * @return
+     */
+    @Override
+    public boolean checkUserName(String sql,Object... params) {
+        UserDao userDao = new UserDaoImpl();
+        return userDao.checkUserName(sql,params);
+    }
 }

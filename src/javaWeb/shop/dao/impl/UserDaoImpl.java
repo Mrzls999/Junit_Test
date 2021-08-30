@@ -29,4 +29,14 @@ public class UserDaoImpl extends BaseDBUtils implements UserDao {
         BaseDBUtils baseDBUtils = new BaseDBUtils();
         return (baseDBUtils.update(sql, params)) == 1;
     }
+
+    /**
+     * 检查是否存在重名
+     * @param params
+     * @return
+     */
+    @Override
+    public boolean checkUserName(String sql,Object... params) {
+        return (new BaseDBUtils().getOneValue(sql, params)!=null);//不为空（存在重名）返回true
+    }
 }
