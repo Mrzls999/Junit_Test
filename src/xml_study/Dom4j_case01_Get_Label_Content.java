@@ -16,7 +16,7 @@ public class Dom4j_case01_Get_Label_Content {
         Element user1 = rootElement.element("user1");//得到user1
         Element user1_name = user1.element("name");
         String text = user1_name.getText();//得到name里边的值
-        System.out.println(text);
+        System.out.println(text);//输出name里的值
     }
 
 }
