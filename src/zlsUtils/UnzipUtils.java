@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
 import java.util.zip.ZipEntry;
@@ -17,7 +16,7 @@ import java.util.zip.ZipInputStream;
  * @description XXX
  */
 
-public class UnZipUtils {
+public class UnzipUtils {
 
     public static final String EXT = ".zip";
     private static final String BASE_DIR = "";
