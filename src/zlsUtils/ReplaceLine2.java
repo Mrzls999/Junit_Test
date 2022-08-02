@@ -18,7 +18,7 @@ public class ReplaceLine2 {
      */
     public static void main(String[] args) throws Exception {
         //String dirPath = "D:\\pkg\\xx";//压缩文件夹路径
-        String dirPath = System.getProperty("user.dir")+"\\dir";//获取当前路径
+        String dirPath = System.getProperty("user.dir");//获取当前路径
         //1、解压文件，修改第二行数据
         unPkgFiles(dirPath);
         modify_LogName_And_Bytes(dirPath);
@@ -27,11 +27,11 @@ public class ReplaceLine2 {
         del_file.add("class");
         del_file.add("zip");
         delete_File(dirPath, del_file);
-        //3、压缩.txt文件为.txt.zip文件
+        //3、压缩.log文件为.log.zip文件
         zipFile(dirPath);
-        //4、删除.txt文件
+        //4、删除.log文件
         del_file.clear();
-        del_file.add("txt");
+        del_file.add("log");
         delete_File(dirPath, del_file);
     }
 
@@ -45,7 +45,9 @@ public class ReplaceLine2 {
         File[] files = dir.listFiles();
         assert files != null;
         for (File file : files) {
-            UnzipUtils.decompress(file, dirPath);
+            if(file.getName().endsWith(".zip")){
+                UnzipUtils.decompress(file, dirPath);
+            }
         }
     }
 
@@ -58,10 +60,10 @@ public class ReplaceLine2 {
         assert files != null;
         for (File file1 : files) {
             String fileName = file1.getName();//获取文件名字
-            if (fileName.endsWith(".log")) {//如果是以log结尾
-                long log_Byte = file1.length();//获取log文件的大小
-                //获取相同的text的文件
-                File file2 = new File(dir + "\\" + fileName.substring(0, fileName.lastIndexOf(".")) + ".txt");
+            if (fileName.endsWith(".txt")) {//如果是以text结尾
+                long log_Byte = file1.length();//获取text文件的大小
+                //获取相同的log的文件
+                File file2 = new File(dir + "\\" + fileName.substring(0, fileName.lastIndexOf(".")) + ".log");
                 //读取文件的第二行内容
                 BufferedReader sb = new BufferedReader(new FileReader(file2));
                 String line = null;
@@ -87,7 +89,7 @@ public class ReplaceLine2 {
     }
 
     /**
-     * 压缩txt文件
+     * 压缩log文件
      */
     public static void zipFile(String dir) throws FileNotFoundException {
         File file_zip = new File(dir);
@@ -95,7 +97,7 @@ public class ReplaceLine2 {
         assert files != null;
         for (File file1 : files) {
             String fileName = file1.getName();//获取文件名字
-            if (fileName.endsWith(".txt")) {//如果是以txt结尾，则压缩
+            if (fileName.endsWith(".log")) {//如果是以log结尾，则压缩
                 String path = file1.getAbsolutePath();
                 zipFile(file1, path+".zip");
             }
