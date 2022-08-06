@@ -54,7 +54,7 @@ public class UnzipUtils {
      */
     public static void decompress(File srcFile, File destFile) throws Exception {
         CheckedInputStream cis = new CheckedInputStream(new FileInputStream(srcFile), new CRC32());
-        ZipInputStream zis = new ZipInputStream(cis, Charset.forName("GBK"));
+        ZipInputStream zis = new ZipInputStream(cis, Charset.forName("GBK"));//此处必须使用GBK哟
         decompress(destFile, zis);
         zis.close();
 
